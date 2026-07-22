@@ -1,0 +1,10 @@
+# Python bytecode cache (generated when running skill scripts)
+__pycache__/
+*.pyc
+
+# Node / tooling artifacts
+node_modules/
+package-lock.json
+
+# OS noise
+.DS_Store
