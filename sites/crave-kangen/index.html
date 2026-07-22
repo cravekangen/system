@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Crave Kangen — Virginia's First Enagic Showroom · Occoquan</title>
+<meta name="description" content="Crave Kangen is Virginia's first Enagic showroom, in historic Occoquan. Taste hydrogen-rich Kangen Water®, join a free weekly water class, and see the machines for yourself." />
+<meta name="theme-color" content="#0B3A40" />
+<meta property="og:title" content="Crave Kangen — Virginia's First Enagic Showroom" />
+<meta property="og:description" content="Hydrogen-rich Kangen Water®, free weekly classes, and live demos in Occoquan, VA." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500;600&display=swap" />
+
+<style>
+/* ============================================================
+   CRAVE KANGEN — Virginia's First Enagic Showroom, Occoquan VA
+   Self-contained single-page site. No framework, no JS libs.
+   Palette: deep water teal + hydrogen aqua + warm brass on mist.
+   ============================================================ */
+
+:root{
+  --ink:#0E1F22; --deep:#0B3A40; --deep-2:#082B30;
+  --teal:#17726E; --aqua:#3FB6BC; --aqua-lt:#A6DEE0; --aqua-deep:#0F5A5C;
+  --brass:#C0A16B; --brass-dk:#9E8149;
+  --paper:#F3F1EA; --paper-2:#FBFAF6; --sand:#E7DFCF;
+  --muted:#566361; --line:rgba(14,31,34,.12); --line-lt:rgba(255,255,255,.14);
+
+  --maxw:1240px; --gutter:clamp(20px,5vw,64px);
+  --ease:cubic-bezier(.22,.61,.36,1); --ease-out:cubic-bezier(.16,1,.3,1);
+  --radius:18px; --radius-lg:28px;
+}
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+@media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+body{ margin:0; font-family:"Inter",system-ui,-apple-system,sans-serif; color:var(--ink);
+  background:var(--paper); font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility; overflow-x:hidden; }
+h1,h2,h3,h4{ font-family:"Fraunces",Georgia,serif; font-weight:400; line-height:1.05;
+  letter-spacing:-.015em; margin:0; font-optical-sizing:auto; }
+p{ margin:0; } a{ color:inherit; text-decoration:none; } img{ max-width:100%; display:block; }
+
+.wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gutter); }
+.section{ padding-block:clamp(64px,10vw,140px); position:relative; }
+section[id]{ scroll-margin-top:92px; }
+.eyebrow{ font-family:"Inter",sans-serif; font-weight:500; font-size:12px; letter-spacing:.28em;
+  text-transform:uppercase; color:var(--teal); display:inline-flex; align-items:center; gap:10px; }
+.eyebrow::before{ content:""; width:26px; height:1px; background:var(--brass); display:inline-block; }
+.eyebrow.center::after{ content:""; width:26px; height:1px; background:var(--brass); display:inline-block; }
+.lead{ font-size:clamp(19px,2.2vw,22px); color:var(--muted); line-height:1.6; max-width:56ch; }
+
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.btn:focus-visible{
+  outline:2px solid var(--brass); outline-offset:3px; border-radius:6px; }
+.skip{ position:absolute; left:-9999px; top:0; background:var(--ink); color:var(--paper);
+  padding:12px 18px; z-index:200; border-radius:0 0 10px 0; }
+.skip:focus{ left:0; }
+
+/* buttons */
+.btn{ --bg:var(--ink); --fg:var(--paper); display:inline-flex; align-items:center; justify-content:center;
+  gap:10px; font-family:"Inter",sans-serif; font-weight:500; font-size:15px; padding:15px 26px;
+  border-radius:100px; cursor:pointer; border:1px solid transparent; background:var(--bg); color:var(--fg);
+  position:relative; transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out),background .3s var(--ease),color .3s var(--ease);
+  will-change:transform; min-height:48px; }
+.btn svg{ width:17px; height:17px; transition:transform .35s var(--ease-out); }
+.btn:hover{ transform:translateY(-2px); box-shadow:0 14px 30px -12px rgba(11,58,64,.5); }
+.btn:hover svg{ transform:translateX(4px); }
+.btn:active{ transform:translateY(0); }
+.btn--aqua{ --bg:var(--aqua); --fg:#05282a; }
+.btn--aqua:hover{ --bg:#54c6cb; }
+.btn--brass{ --bg:var(--brass); --fg:#1a1405; }
+.btn--brass:hover{ --bg:#cbae7a; }
+.btn--ghost{ --bg:transparent; --fg:var(--ink); border-color:var(--line); }
+.btn--ghost:hover{ border-color:var(--ink); box-shadow:none; background:rgba(14,31,34,.03); }
+.btn--on-dark{ --bg:var(--paper); --fg:var(--ink); }
+.btn--ghost-dark{ --bg:transparent; --fg:var(--paper); border-color:var(--line-lt); }
+.btn--ghost-dark:hover{ border-color:var(--aqua-lt); background:rgba(255,255,255,.06); box-shadow:none; }
+.btn svg.ext{ transition:transform .35s var(--ease-out); }
+.btn:hover svg.ext{ transform:translate(3px,-3px); }
+
+/* topbar + nav */
+.topbar{ background:var(--deep-2); color:var(--aqua-lt); font-size:12.5px; letter-spacing:.05em;
+  text-align:center; padding:9px 16px; }
+.topbar strong{ color:var(--paper); font-weight:500; }
+.nav{ position:sticky; top:0; z-index:100;
+  background:color-mix(in srgb,var(--paper) 78%,transparent);
+  backdrop-filter:blur(14px) saturate(1.1); -webkit-backdrop-filter:blur(14px) saturate(1.1);
+  border-bottom:1px solid transparent;
+  transition:background .4s var(--ease),border-color .4s var(--ease),box-shadow .4s var(--ease); }
+.nav__inner{ display:flex; align-items:center; justify-content:space-between; gap:24px;
+  padding-block:20px; transition:padding .4s var(--ease); }
+.nav.is-condensed{ box-shadow:0 1px 0 var(--line); border-color:var(--line);
+  background:color-mix(in srgb,var(--paper) 92%,transparent); }
+.nav.is-condensed .nav__inner{ padding-block:12px; }
+.brand{ display:inline-flex; align-items:center; gap:11px; font-family:"Fraunces",serif;
+  font-size:22px; color:var(--ink); }
+.brand .mark{ width:32px; height:32px; flex:0 0 auto; }
+.brand small{ display:block; font-family:"Inter",sans-serif; font-size:9px; letter-spacing:.28em;
+  text-transform:uppercase; color:var(--teal); margin-top:2px; }
+.nav__links{ display:flex; align-items:center; gap:30px; list-style:none; margin:0; padding:0; }
+.nav__links a{ font-size:14.5px; color:var(--ink); position:relative; padding:4px 0; }
+.nav__links a::after{ content:""; position:absolute; left:0; bottom:-2px; height:1px; width:0;
+  background:var(--brass); transition:width .35s var(--ease-out); }
+.nav__links a:hover::after{ width:100%; }
+.nav__cta{ display:flex; align-items:center; gap:14px; }
+.nav__toggle{ display:none; background:none; border:0; cursor:pointer; padding:8px; width:44px; height:44px; }
+.nav__toggle span{ display:block; width:24px; height:1.6px; background:var(--ink); margin:5px auto;
+  transition:transform .35s var(--ease),opacity .3s; }
+.nav.is-open .nav__toggle span:nth-child(1){ transform:translateY(6.6px) rotate(45deg); }
+.nav.is-open .nav__toggle span:nth-child(2){ opacity:0; }
+.nav.is-open .nav__toggle span:nth-child(3){ transform:translateY(-6.6px) rotate(-45deg); }
+@media (max-width:1000px){
+  .nav__links,.nav__cta .btn{ display:none; }
+  .nav__toggle{ display:block; }
+  .mobile-menu{ position:fixed; inset:0 0 0 auto; width:min(86vw,380px); z-index:99; background:var(--deep);
+    color:var(--paper); padding:100px 32px 40px; transform:translateX(100%); transition:transform .5s var(--ease-out);
+    display:flex; flex-direction:column; gap:4px; box-shadow:-20px 0 60px -20px rgba(0,0,0,.5); }
+  .mobile-menu.is-open{ transform:translateX(0); }
+  .mobile-menu a{ font-family:"Fraunces",serif; font-size:25px; padding:13px 0;
+    border-bottom:1px solid var(--line-lt); color:var(--paper); }
+  .mobile-menu .btn{ margin-top:22px; }
+  .scrim{ position:fixed; inset:0; background:rgba(6,20,22,.5); z-index:98; opacity:0; visibility:hidden;
+    transition:opacity .4s; backdrop-filter:blur(2px); }
+  .scrim.is-open{ opacity:1; visibility:visible; }
+}
+.mobile-menu{ display:none; } @media (max-width:1000px){ .mobile-menu{ display:flex; } }
+
+/* hero */
+.hero{ position:relative; background:var(--deep); color:var(--paper); overflow:hidden; isolation:isolate; }
+.hero__water{ position:absolute; inset:0; z-index:-2; overflow:hidden; }
+.hero__water span{ position:absolute; border-radius:50%; filter:blur(60px); opacity:.55; will-change:transform; }
+.hero__water .w1{ width:60vw; height:60vw; left:-10vw; top:-20vw;
+  background:radial-gradient(circle at 30% 30%,var(--teal),transparent 62%); animation:drift1 22s var(--ease) infinite alternate; }
+.hero__water .w2{ width:52vw; height:52vw; right:-14vw; top:4vw;
+  background:radial-gradient(circle at 60% 40%,var(--aqua),transparent 60%); opacity:.4; animation:drift2 26s var(--ease) infinite alternate; }
+.hero__water .w3{ width:40vw; height:40vw; left:26vw; bottom:-16vw;
+  background:radial-gradient(circle at 50% 50%,var(--aqua-deep),transparent 64%); animation:drift3 30s var(--ease) infinite alternate; }
+.hero__grain{ position:absolute; inset:0; z-index:-1; opacity:.5; pointer-events:none;
+  background:radial-gradient(1px 1px at 20% 30%,rgba(255,255,255,.10),transparent),
+    radial-gradient(1px 1px at 70% 60%,rgba(255,255,255,.08),transparent),
+    radial-gradient(1px 1px at 40% 80%,rgba(255,255,255,.06),transparent);
+  background-size:140px 140px,200px 200px,170px 170px; }
+@keyframes drift1{ to{ transform:translate3d(8vw,6vw,0) scale(1.15); } }
+@keyframes drift2{ to{ transform:translate3d(-7vw,4vw,0) scale(1.1); } }
+@keyframes drift3{ to{ transform:translate3d(4vw,-6vw,0) scale(1.2); } }
+.hero__inner{ padding-block:clamp(56px,9vw,120px) 0; position:relative; }
+.hero__badge{ display:inline-flex; align-items:center; gap:9px; padding:8px 16px; border-radius:100px;
+  border:1px solid var(--line-lt); background:rgba(255,255,255,.05); font-size:12.5px; letter-spacing:.06em;
+  color:var(--aqua-lt); }
+.hero__badge b{ color:var(--paper); font-weight:500; }
+.hero__badge .dot{ width:7px; height:7px; border-radius:50%; background:var(--aqua); box-shadow:0 0 0 3px rgba(63,182,188,.25); }
+.hero h1{ font-size:clamp(42px,7.6vw,98px); font-weight:340; letter-spacing:-.03em; margin-top:24px; max-width:16ch; }
+.hero h1 em{ font-style:italic; color:var(--aqua-lt); font-weight:340; }
+.hero__sub{ margin-top:26px; font-size:clamp(17px,2vw,20px); color:rgba(243,241,234,.82); max-width:54ch; line-height:1.6; }
+.hero__actions{ margin-top:34px; display:flex; flex-wrap:wrap; gap:14px; }
+.hero__meta{ margin-top:clamp(44px,7vw,80px); padding:26px 0 40px; border-top:1px solid var(--line-lt);
+  display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+.hero__meta .n{ font-family:"Fraunces",serif; font-size:clamp(24px,3.2vw,38px); color:var(--paper);
+  letter-spacing:-.02em; display:flex; align-items:baseline; gap:4px; }
+.hero__meta .n .star{ color:var(--brass); font-size:.8em; }
+.hero__meta .l{ font-size:12px; color:var(--aqua-lt); letter-spacing:.1em; text-transform:uppercase; margin-top:4px; }
+@media (max-width:720px){ .hero__meta{ grid-template-columns:repeat(2,1fr); row-gap:28px; } }
+.wave{ display:block; width:100%; height:auto; margin-bottom:-6px; position:relative; z-index:2; }
+.wave path{ fill:var(--paper); }
+.hero__waves{ margin-top:clamp(20px,4vw,40px); }
+.scrollcue{ position:absolute; left:50%; bottom:90px; transform:translateX(-50%); writing-mode:vertical-rl;
+  font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--aqua-lt); display:flex;
+  align-items:center; gap:14px; opacity:.9; }
+.scrollcue::after{ content:""; width:1px; height:46px; background:linear-gradient(var(--aqua-lt),transparent);
+  animation:cue 2.4s var(--ease) infinite; transform-origin:top; }
+@keyframes cue{ 0%{ transform:scaleY(.2); opacity:0; } 40%{ opacity:1; } 100%{ transform:scaleY(1); opacity:0; } }
+@media (max-width:1000px){ .scrollcue{ display:none; } }
+
+/* story */
+.story{ text-align:center; } .story .wrap{ max-width:940px; }
+.story h2{ font-size:clamp(28px,4.5vw,50px); font-weight:340; line-height:1.14; }
+.story h2 em{ font-style:italic; color:var(--teal); }
+.story .place{ margin-top:32px; display:inline-flex; align-items:center; gap:12px; font-size:13px;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+.story .place svg{ width:16px; height:16px; color:var(--brass); }
+
+/* menu */
+.menu__head{ display:flex; align-items:flex-end; justify-content:space-between; gap:32px; flex-wrap:wrap;
+  margin-bottom:clamp(36px,5vw,56px); }
+.menu__head h2{ font-size:clamp(30px,5vw,56px); font-weight:340; max-width:15ch; }
+.menu__head h2 em{ font-style:italic; color:var(--teal); }
+.menu__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.mcard{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius-lg);
+  padding:28px 26px; display:flex; flex-direction:column; gap:14px; position:relative; overflow:hidden;
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out); }
+.mcard:hover{ transform:translateY(-6px); box-shadow:0 30px 60px -30px rgba(11,58,64,.32); }
+.mcard__ph{ display:inline-flex; align-items:center; gap:8px; font-family:"Fraunces",serif; font-size:15px;
+  color:var(--ink); }
+.mcard__ph .chip{ width:34px; height:34px; border-radius:10px; display:grid; place-items:center;
+  font-family:"Inter",sans-serif; font-weight:600; font-size:12px; color:#05282a; }
+.mcard h3{ font-size:22px; font-weight:400; }
+.mcard p{ color:var(--muted); font-size:14.5px; }
+.mcard__use{ margin-top:auto; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); }
+.mcard--star{ background:var(--deep); color:var(--paper); border-color:transparent; }
+.mcard--star::before{ content:""; position:absolute; inset:0; z-index:0; opacity:.55;
+  background:radial-gradient(110% 100% at 85% 0%,rgba(63,182,188,.4),transparent 60%); }
+.mcard--star>*{ position:relative; z-index:1; }
+.mcard--star .mcard__ph,.mcard--star h3{ color:var(--paper); }
+.mcard--star p{ color:rgba(243,241,234,.82); }
+.mcard--star .mcard__use{ color:var(--aqua-lt); }
+.mcard__badge{ align-self:flex-start; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+  color:#05282a; background:var(--aqua); padding:5px 11px; border-radius:100px; }
+.menu__note{ margin-top:26px; text-align:center; font-size:14px; color:var(--muted); }
+@media (max-width:900px){ .menu__grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:560px){ .menu__grid{ grid-template-columns:1fr; } }
+
+/* water (science) */
+.water{ background:var(--deep); color:var(--paper); position:relative; overflow:hidden; }
+.water::before{ content:""; position:absolute; inset:0; opacity:.5;
+  background:radial-gradient(70% 60% at 12% 0%,rgba(63,182,188,.35),transparent 60%); }
+.water .wrap{ position:relative; }
+.water__grid{ display:grid; grid-template-columns:1.05fr 1fr; gap:clamp(36px,5vw,72px); align-items:center; }
+.water__copy .eyebrow{ color:var(--aqua-lt); }
+.water__copy h2{ font-size:clamp(30px,4.6vw,52px); font-weight:340; margin-top:20px; }
+.water__copy h2 em{ font-style:italic; color:var(--aqua-lt); }
+.water__copy p{ margin-top:20px; color:rgba(243,241,234,.82); max-width:48ch; }
+.water__points{ margin-top:28px; display:grid; gap:16px; list-style:none; padding:0; }
+.water__points li{ display:flex; gap:14px; align-items:flex-start; }
+.water__points svg{ width:22px; height:22px; color:var(--aqua); flex:0 0 auto; margin-top:2px; }
+.water__points b{ font-family:"Inter",sans-serif; font-weight:500; }
+.water__points span{ display:block; color:rgba(243,241,234,.72); font-size:14.5px; margin-top:2px; }
+/* pH scale visual */
+.phscale{ background:rgba(255,255,255,.04); border:1px solid var(--line-lt); border-radius:var(--radius-lg);
+  padding:28px; }
+.phscale h4{ font-family:"Inter",sans-serif; font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--aqua-lt); font-weight:500; }
+.phscale__bar{ height:14px; border-radius:100px; margin:18px 0 10px;
+  background:linear-gradient(90deg,#c0392b,#e08e3c,#e9c94a,#7fc24a,#3fb6bc,#2f7fb8,#3a4fb8); }
+.phscale__ticks{ display:flex; justify-content:space-between; font-size:12px; color:rgba(243,241,234,.7); }
+.phrow{ margin-top:22px; display:grid; gap:12px; }
+.phrow .r{ display:flex; align-items:center; gap:12px; font-size:14px; }
+.phrow .r .sw{ width:14px; height:14px; border-radius:4px; flex:0 0 auto; }
+.phrow .r .v{ margin-left:auto; font-family:"Fraunces",serif; color:var(--paper); }
+@media (max-width:860px){ .water__grid{ grid-template-columns:1fr; } }
+
+/* filters */
+.filters__head{ text-align:center; max-width:680px; margin-inline:auto; margin-bottom:clamp(40px,5vw,60px); }
+.filters__head h2{ font-size:clamp(30px,5vw,54px); font-weight:340; margin-top:18px; }
+.filters__head h2 em{ font-style:italic; color:var(--teal); }
+.filters__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+.fcard{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius);
+  padding:26px 24px; transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out); }
+.fcard:hover{ transform:translateY(-5px); box-shadow:0 24px 50px -28px rgba(11,58,64,.3); }
+.fcard__ico{ width:46px; height:46px; border-radius:12px; display:grid; place-items:center;
+  background:var(--sand); color:var(--teal); margin-bottom:16px; }
+.fcard__ico svg{ width:22px; height:22px; }
+.fcard h3{ font-size:19px; font-weight:400; }
+.fcard p{ color:var(--muted); font-size:14px; margin-top:8px; }
+@media (max-width:900px){ .filters__grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:520px){ .filters__grid{ grid-template-columns:1fr; } }
+
+/* classes */
+.classes__grid{ display:grid; grid-template-columns:1.15fr 1fr; gap:22px; }
+.classcard{ border-radius:var(--radius-lg); padding:clamp(30px,4vw,48px); position:relative; overflow:hidden; }
+.classcard--free{ background:var(--deep); color:var(--paper); }
+.classcard--free::before{ content:""; position:absolute; inset:0; opacity:.5;
+  background:radial-gradient(90% 80% at 90% 10%,rgba(63,182,188,.4),transparent 60%); }
+.classcard--free>*{ position:relative; z-index:1; }
+.classcard--private{ background:var(--sand); color:var(--ink);
+  display:flex; flex-direction:column; justify-content:space-between; }
+.classcard .tag{ font-size:12px; letter-spacing:.16em; text-transform:uppercase; }
+.classcard--free .tag{ color:var(--aqua-lt); }
+.classcard--private .tag{ color:var(--teal); }
+.classcard h3{ font-size:clamp(26px,3.2vw,38px); font-weight:340; margin-top:16px; }
+.classcard--free h3 em{ font-style:italic; color:var(--aqua-lt); }
+.classcard p{ margin-top:16px; max-width:44ch; }
+.classcard--free p{ color:rgba(243,241,234,.82); }
+.classcard--private p{ color:var(--muted); }
+.classcard__meta{ margin-top:26px; display:flex; flex-wrap:wrap; gap:22px; }
+.classcard__meta .m{ display:flex; align-items:center; gap:10px; font-size:14px; }
+.classcard__meta svg{ width:18px; height:18px; color:var(--aqua); }
+.classcard--private .classcard__meta svg{ color:var(--teal); }
+.classcard .btn{ margin-top:30px; }
+.rabbit{ margin-top:30px; display:inline-flex; align-items:center; gap:10px; font-size:15px;
+  color:var(--ink); border-bottom:1px solid var(--line); padding-bottom:4px; width:fit-content;
+  transition:gap .3s var(--ease-out),border-color .3s; }
+.rabbit:hover{ gap:16px; border-color:var(--brass); }
+.rabbit svg{ width:18px; height:18px; }
+@media (max-width:820px){ .classes__grid{ grid-template-columns:1fr; } }
+
+/* systems (link-out only) */
+.systems{ background:var(--sand); }
+.systems__head{ text-align:center; max-width:680px; margin-inline:auto; margin-bottom:clamp(36px,4vw,52px); }
+.systems__head h2{ font-size:clamp(30px,5vw,54px); font-weight:340; margin-top:18px; }
+.systems__head h2 em{ font-style:italic; color:var(--teal); }
+.systems__row{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:36px; }
+.sys{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius); padding:24px 22px;
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out); }
+.sys:hover{ transform:translateY(-5px); box-shadow:0 24px 50px -28px rgba(11,58,64,.28); }
+.sys .k{ font-family:"Fraunces",serif; font-size:22px; }
+.sys .t{ font-size:13px; color:var(--teal); letter-spacing:.04em; margin-top:2px; }
+.sys p{ font-size:13.5px; color:var(--muted); margin-top:12px; }
+.systems__cta{ background:var(--deep); color:var(--paper); border-radius:var(--radius-lg);
+  padding:clamp(30px,4vw,48px); display:flex; align-items:center; justify-content:space-between; gap:30px;
+  flex-wrap:wrap; position:relative; overflow:hidden; }
+.systems__cta::before{ content:""; position:absolute; inset:0; opacity:.5;
+  background:radial-gradient(80% 100% at 100% 0%,rgba(63,182,188,.4),transparent 60%); }
+.systems__cta>*{ position:relative; z-index:1; }
+.systems__cta h3{ font-size:clamp(24px,3vw,34px); font-weight:340; max-width:18ch; }
+.systems__cta h3 em{ font-style:italic; color:var(--aqua-lt); }
+.systems__cta p{ color:rgba(243,241,234,.8); font-size:14.5px; margin-top:10px; max-width:40ch; }
+@media (max-width:900px){ .systems__row{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:520px){ .systems__row{ grid-template-columns:1fr; } }
+
+/* business / marketing software */
+.biz__grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,5vw,72px); align-items:center; }
+.biz__copy h2{ font-size:clamp(30px,4.6vw,52px); font-weight:340; margin-top:20px; }
+.biz__copy h2 em{ font-style:italic; color:var(--teal); }
+.biz__copy p{ margin-top:20px; color:var(--muted); max-width:46ch; }
+.biz__list{ margin-top:26px; display:grid; gap:14px; list-style:none; padding:0; }
+.biz__list li{ display:flex; gap:12px; align-items:flex-start; font-size:15.5px; }
+.biz__list svg{ width:20px; height:20px; color:var(--teal); flex:0 0 auto; margin-top:3px; }
+.biz__actions{ margin-top:30px; display:flex; flex-wrap:wrap; gap:14px; }
+.biz__panel{ background:var(--deep); color:var(--paper); border-radius:var(--radius-lg);
+  padding:clamp(28px,3.5vw,42px); position:relative; overflow:hidden; }
+.biz__panel::before{ content:""; position:absolute; inset:0; opacity:.5;
+  background:radial-gradient(90% 80% at 15% 100%,rgba(63,182,188,.35),transparent 60%); }
+.biz__panel>*{ position:relative; z-index:1; }
+.biz__panel .eyebrow{ color:var(--aqua-lt); }
+.biz__panel h3{ font-size:26px; font-weight:340; margin-top:16px; }
+.biz__panel h3 em{ font-style:italic; color:var(--aqua-lt); }
+.biz__feat{ margin-top:22px; display:grid; gap:14px; }
+.biz__feat .row{ display:flex; gap:13px; align-items:flex-start; padding-bottom:14px; border-bottom:1px solid var(--line-lt); }
+.biz__feat .row:last-child{ border-bottom:0; padding-bottom:0; }
+.biz__feat svg{ width:20px; height:20px; color:var(--aqua); flex:0 0 auto; margin-top:2px; }
+.biz__feat .k{ font-weight:500; }
+.biz__feat .d{ color:rgba(243,241,234,.72); font-size:14px; margin-top:2px; }
+@media (max-width:860px){ .biz__grid{ grid-template-columns:1fr; } }
+
+/* reviews */
+.reviews{ background:var(--deep-2); color:var(--paper); }
+.reviews__head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  margin-bottom:clamp(34px,4vw,52px); }
+.reviews__head .eyebrow{ color:var(--aqua-lt); }
+.reviews__head h2{ font-size:clamp(28px,4.4vw,48px); font-weight:340; margin-top:16px; max-width:18ch; }
+.reviews__head h2 em{ font-style:italic; color:var(--aqua-lt); }
+.reviews__score{ text-align:right; }
+.reviews__score .s{ font-family:"Fraunces",serif; font-size:52px; line-height:1; }
+.reviews__score .stars{ color:var(--brass); letter-spacing:3px; margin-top:6px; }
+.reviews__score .c{ font-size:13px; color:var(--aqua-lt); margin-top:6px; }
+.reviews__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.rev{ background:rgba(255,255,255,.04); border:1px solid var(--line-lt); border-radius:var(--radius-lg);
+  padding:30px 28px; display:flex; flex-direction:column; }
+.rev .stars{ color:var(--brass); letter-spacing:2px; font-size:14px; }
+.rev p{ font-family:"Fraunces",serif; font-weight:300; font-size:19px; line-height:1.45; margin-top:16px; }
+.rev .by{ margin-top:auto; padding-top:22px; font-size:13.5px; color:var(--aqua-lt); }
+@media (max-width:860px){ .reviews__grid{ grid-template-columns:1fr; } .reviews__score{ text-align:left; } }
+
+/* visit (location + contact folded) */
+.visit__grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,5vw,64px); }
+.visit__info .eyebrow{ margin-bottom:18px; }
+.visit__info h2{ font-size:clamp(30px,4.6vw,52px); font-weight:340; }
+.visit__info h2 em{ font-style:italic; color:var(--teal); }
+.visit__rows{ margin-top:30px; display:grid; gap:22px; }
+.visit__rows .row{ display:flex; gap:14px; align-items:flex-start; }
+.visit__rows svg{ width:20px; height:20px; color:var(--brass); flex:0 0 auto; margin-top:3px; }
+.visit__rows .k{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); }
+.visit__rows .v{ font-size:16px; margin-top:3px; }
+.visit__rows .v a{ border-bottom:1px solid var(--line); }
+.visit__rows .v a:hover{ border-color:var(--brass); }
+.hours{ margin-top:8px; display:grid; gap:5px; font-size:15px; }
+.hours .h{ display:flex; justify-content:space-between; max-width:280px; color:var(--ink); }
+.hours .h span:last-child{ color:var(--muted); }
+.hours .h.today{ font-weight:500; }
+.hours .h.today span:last-child{ color:var(--teal); }
+.map{ margin-top:26px; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line);
+  aspect-ratio:16/10; position:relative; background:linear-gradient(160deg,#dfe9e6,#c8ded9); }
+.map__pin{ position:absolute; top:44%; left:52%; transform:translate(-50%,-50%); text-align:center; }
+.map__pin svg{ width:34px; height:34px; color:var(--teal); filter:drop-shadow(0 6px 10px rgba(0,0,0,.2)); }
+.map__pin .lbl{ font-size:12px; background:var(--paper); padding:5px 10px; border-radius:100px; margin-top:6px;
+  box-shadow:0 6px 16px -6px rgba(0,0,0,.3); }
+.map a.open{ position:absolute; right:14px; bottom:14px; background:var(--paper); color:var(--ink);
+  font-size:13px; padding:9px 14px; border-radius:100px; box-shadow:0 6px 16px -6px rgba(0,0,0,.3);
+  display:inline-flex; gap:7px; align-items:center; }
+.map__lines{ position:absolute; inset:0; opacity:.5; background-image:
+  linear-gradient(rgba(23,114,110,.12) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(23,114,110,.12) 1px,transparent 1px); background-size:40px 40px; }
+/* reserve form */
+.bform{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius-lg);
+  padding:clamp(26px,3vw,38px); box-shadow:0 40px 80px -50px rgba(11,58,64,.5); }
+.bform h3{ font-size:26px; font-weight:400; }
+.bform p.sub{ color:var(--muted); font-size:14.5px; margin-top:8px; }
+.field{ margin-top:18px; }
+.field label{ display:block; font-size:13px; font-weight:500; margin-bottom:7px; }
+.field label .req{ color:var(--brass-dk); }
+.field input,.field select,.field textarea{ width:100%; font-family:inherit; font-size:15px; color:var(--ink);
+  padding:13px 15px; border:1px solid var(--line); border-radius:12px; background:var(--paper);
+  transition:border-color .3s var(--ease),box-shadow .3s var(--ease); min-height:48px; }
+.field textarea{ min-height:88px; resize:vertical; }
+.field input:focus,.field select:focus,.field textarea:focus{ outline:none; border-color:var(--teal);
+  box-shadow:0 0 0 3px rgba(23,114,110,.15); }
+.field-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.field .hint{ font-size:12.5px; color:var(--muted); margin-top:6px; }
+.bform .btn{ width:100%; margin-top:22px; }
+.form-note{ font-size:12.5px; color:var(--muted); text-align:center; margin-top:14px; }
+.form-success{ display:none; margin-top:16px; padding:14px 16px; border-radius:12px;
+  background:rgba(23,114,110,.1); border:1px solid rgba(23,114,110,.3); color:var(--teal); font-size:14.5px;
+  align-items:center; gap:10px; }
+.form-success.is-visible{ display:flex; }
+.form-success svg{ width:20px; height:20px; flex:0 0 auto; }
+@media (max-width:860px){ .visit__grid{ grid-template-columns:1fr; } .field-row{ grid-template-columns:1fr; } }
+
+/* footer */
+.footer{ background:var(--deep-2); color:var(--paper); padding-block:clamp(56px,7vw,84px) 30px; }
+.footer__top{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1.2fr; gap:36px; }
+.footer .brand{ color:var(--paper); } .footer .brand small{ color:var(--aqua-lt); }
+.footer__blurb{ color:rgba(243,241,234,.7); font-size:14.5px; margin-top:18px; max-width:34ch; }
+.footer h4{ font-family:"Inter",sans-serif; font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--aqua-lt); font-weight:500; margin-bottom:16px; }
+.footer ul{ list-style:none; margin:0; padding:0; display:grid; gap:11px; }
+.footer ul a{ color:rgba(243,241,234,.82); font-size:14.5px; transition:color .3s; }
+.footer ul a:hover{ color:var(--paper); }
+.socials{ display:flex; gap:12px; margin-top:20px; }
+.socials a{ width:40px; height:40px; border-radius:50%; border:1px solid var(--line-lt); display:grid;
+  place-items:center; color:var(--aqua-lt); transition:background .3s,color .3s,transform .3s var(--ease-out); }
+.socials a:hover{ background:var(--paper); color:var(--ink); transform:translateY(-3px); }
+.socials svg{ width:18px; height:18px; }
+.footer__bot{ margin-top:clamp(40px,5vw,60px); padding-top:24px; border-top:1px solid var(--line-lt);
+  display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; font-size:12.5px; color:rgba(243,241,234,.55); }
+.footer__bot a:hover{ color:var(--paper); }
+.footer__disc{ margin-top:16px; font-size:11.5px; color:rgba(243,241,234,.45); max-width:70ch; line-height:1.5; }
+@media (max-width:820px){ .footer__top{ grid-template-columns:1fr 1fr; } .footer__brandcol{ grid-column:span 2; } }
+@media (max-width:520px){ .footer__top{ grid-template-columns:1fr; } .footer__brandcol{ grid-column:span 1; } }
+
+/* reveal */
+.reveal{ opacity:0; transform:translateY(26px); transition:opacity .9s var(--ease-out),transform .9s var(--ease-out); }
+.reveal.in{ opacity:1; transform:none; }
+.reveal[data-delay="1"]{ transition-delay:.08s; } .reveal[data-delay="2"]{ transition-delay:.16s; }
+.reveal[data-delay="3"]{ transition-delay:.24s; } .reveal[data-delay="4"]{ transition-delay:.32s; }
+.reveal[data-delay="5"]{ transition-delay:.40s; }
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ animation:none !important; transition-duration:.001ms !important; }
+  .reveal{ opacity:1 !important; transform:none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">Virginia's first Enagic® showroom · <strong>Free water class every week in Occoquan</strong></div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="#" aria-label="Crave Kangen home">
+      <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" stroke="#17726E" stroke-width="1.3"/>
+        <path d="M16 6c3.5 4 5.5 6.6 5.5 9.6a5.5 5.5 0 11-11 0C10.5 12.6 12.5 10 16 6z" stroke="#3FB6BC" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
+        <path d="M13.4 15.8c0 1.3 1 2.4 2.4 2.6" stroke="#C0A16B" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      <span>Crave Kangen<small>Occoquan · Virginia</small></span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav__links">
+        <li><a href="#menu">The Menu</a></li>
+        <li><a href="#water">The Water</a></li>
+        <li><a href="#classes">Free Class</a></li>
+        <li><a href="#systems">Systems</a></li>
+        <li><a href="#business">Business</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+    </nav>
+    <div class="nav__cta">
+      <a class="btn btn--aqua" href="#classes">Reserve a class
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+  <a href="#menu">The Menu</a>
+  <a href="#water">The Water</a>
+  <a href="#classes">Free Class</a>
+  <a href="#systems">Systems</a>
+  <a href="#business">Business</a>
+  <a href="#visit">Visit</a>
+  <a class="btn btn--aqua" href="#classes">Reserve a class</a>
+</nav>
+<div class="scrim" id="scrim" hidden></div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__water" aria-hidden="true"><span class="w1"></span><span class="w2"></span><span class="w3"></span></div>
+  <div class="hero__grain" aria-hidden="true"></div>
+  <div class="wrap hero__inner">
+    <span class="hero__badge reveal"><span class="dot"></span>First Enagic® showroom in <b>Virginia</b></span>
+    <h1 class="reveal" data-delay="1">Taste the water<br><em>before you believe it.</em></h1>
+    <p class="hero__sub reveal" data-delay="2">Crave Kangen is a Kangen Water® storefront in historic Occoquan — hydrogen-rich, freshly ionized water on tap, live machine demos, and a free class every week. Come thirsty. Leave informed.</p>
+    <div class="hero__actions reveal" data-delay="3">
+      <a class="btn btn--on-dark" href="#classes">Join a free water class
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn--ghost-dark" href="#menu">See the menu</a>
+    </div>
+    <div class="hero__meta reveal" data-delay="4">
+      <div><div class="n"><span class="star">★</span><span data-count="4.7" data-decimals="1">0</span></div><div class="l">Rated by guests</div></div>
+      <div><div class="n">1<span class="star" style="font-size:.6em">st</span></div><div class="l">Enagic showroom in VA</div></div>
+      <div><div class="n"><span data-count="5">0</span></div><div class="l">Waters, one machine</div></div>
+      <div><div class="n">$<span data-count="0">0</span></div><div class="l">Weekly class &amp; demo</div></div>
+    </div>
+    <div class="hero__waves" aria-hidden="true">
+      <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,50 L1440,90 L0,90 Z"></path></svg>
+    </div>
+  </div>
+  <div class="scrollcue" aria-hidden="true">Scroll</div>
+</section>
+
+<!-- STORY -->
+<section class="section story">
+  <div class="wrap">
+    <span class="eyebrow center reveal">Our story</span>
+    <h2 class="reveal" data-delay="1" style="margin-top:26px">We opened Virginia's first Enagic® showroom so you'd never have to take water <em>on faith.</em> Walk in, taste all five waters, and watch the science happen at the counter.</h2>
+    <div class="place reveal" data-delay="2">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.4 7-11a7 7 0 10-14 0c0 4.6 7 11 7 11z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.5"/></svg>
+      206 Union Street · Historic Occoquan, Virginia
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED MENU -->
+<section class="section" id="menu">
+  <div class="wrap">
+    <div class="menu__head">
+      <div>
+        <span class="eyebrow reveal">The Menu</span>
+        <h2 class="reveal" data-delay="1" style="margin-top:18px">One machine. <em>Five waters.</em> A taste of what's on tap.</h2>
+      </div>
+      <p class="lead reveal" data-delay="2">Every water below is poured fresh from the same Enagic® system — no bottles, no additives. Come taste the difference between them side by side.</p>
+    </div>
+    <div class="menu__grid">
+      <article class="mcard mcard--star reveal">
+        <span class="mcard__badge">Guest favorite</span>
+        <div class="mcard__ph"><span class="chip" style="background:#3fb6bc">H₂</span>Hydrogen-Rich Water</div>
+        <p>Freshly ionized and loaded with dissolved molecular hydrogen — light, smooth, and best sipped the moment it's poured.</p>
+        <div class="mcard__use">Daily hydration · Recovery</div>
+      </article>
+      <article class="mcard reveal" data-delay="1">
+        <div class="mcard__ph"><span class="chip" style="background:#7fc24a">8.5</span>Kangen Water® 8.5–9.5</div>
+        <p>Ionized alkaline drinking water across three levels — the everyday pour our regulars fill their bottles with.</p>
+        <div class="mcard__use">Drink · Cook · Brew</div>
+      </article>
+      <article class="mcard reveal" data-delay="2">
+        <div class="mcard__ph"><span class="chip" style="background:#e9c94a">7.0</span>Clean Water 7.0</div>
+        <p>Neutral, filtered, pure. The gentle pour for little ones, pets, and taking with medication.</p>
+        <div class="mcard__use">Neutral · Everyday</div>
+      </article>
+      <article class="mcard reveal">
+        <div class="mcard__ph"><span class="chip" style="background:#e08e3c">6.0</span>Beauty Water 4.0–6.0</div>
+        <p>Mildly acidic and astringent — guests use it as a facial toner and a natural rinse for hair and skin.</p>
+        <div class="mcard__use">Skin · Hair · Toner</div>
+      </article>
+      <article class="mcard reveal" data-delay="1">
+        <div class="mcard__ph"><span class="chip" style="background:#2f7fb8;color:#fff">11.5</span>Strong Kangen 11.5</div>
+        <p>High-alkaline water for the kitchen — wash produce, lift oil, and prep without harsh chemicals.</p>
+        <div class="mcard__use">Kitchen · Produce</div>
+      </article>
+      <article class="mcard reveal" data-delay="2">
+        <div class="mcard__ph"><span class="chip" style="background:#c0392b;color:#fff">2.5</span>Strong Acidic 2.5</div>
+        <p>A crisp, sanitizing water for surfaces and hands — one of the reasons a single machine replaces a cabinet of bottles.</p>
+        <div class="mcard__use">Clean · Sanitize</div>
+      </article>
+    </div>
+    <p class="menu__note reveal">This is a taste, not the full list — the complete menu is poured fresh in-store. <a href="#visit" style="color:var(--teal);border-bottom:1px solid var(--line)">Come try all five →</a></p>
+  </div>
+</section>
+
+<!-- THE WATER (science) -->
+<section class="section water" id="water">
+  <div class="wrap">
+    <div class="water__grid">
+      <div class="water__copy">
+        <span class="eyebrow reveal">The Water</span>
+        <h2 class="reveal" data-delay="1">Not a brand of water — <em>a machine that makes it.</em></h2>
+        <p class="reveal" data-delay="2">Enagic's system runs your tap water through medical-grade filtration, then splits it with electrolysis across platinum-coated titanium plates. The result is a range of waters at different pH levels — including hydrogen-rich Kangen Water® you drink within moments of pouring.</p>
+        <ul class="water__points reveal" data-delay="3">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c3.5 4.5 6 7.4 6 10.5a6 6 0 11-12 0C6 10.4 8.5 7.5 12 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><div><b>Hydrogen-rich, at the source</b><span>Molecular hydrogen (H₂) dissolves as the water ionizes — freshest the instant it's poured, which is why we pour it in front of you.</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><div><b>Filtered first, always</b><span>Sediment, chlorine, and taste-and-odor compounds are reduced before any water reaches your glass.</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Five waters, one countertop</b><span>Drinking, beauty, cooking, and cleaning waters from a single system that installs at your sink.</span></div></li>
+        </ul>
+      </div>
+      <div class="phscale reveal" data-delay="2">
+        <h4>The pH range, poured fresh</h4>
+        <div class="phscale__bar" aria-hidden="true"></div>
+        <div class="phscale__ticks"><span>2.5</span><span>6.0</span><span>7.0</span><span>8.5</span><span>9.5</span><span>11.5</span></div>
+        <div class="phrow">
+          <div class="r"><span class="sw" style="background:#c0392b"></span>Strong Acidic — sanitizing<span class="v">2.5</span></div>
+          <div class="r"><span class="sw" style="background:#e08e3c"></span>Beauty Water — skin &amp; hair<span class="v">4–6</span></div>
+          <div class="r"><span class="sw" style="background:#e9c94a"></span>Clean Water — neutral<span class="v">7.0</span></div>
+          <div class="r"><span class="sw" style="background:#7fc24a"></span>Kangen — drinking<span class="v">8.5–9.5</span></div>
+          <div class="r"><span class="sw" style="background:#2f7fb8"></span>Strong Kangen — kitchen<span class="v">11.5</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<section class="section" id="filters">
+  <div class="wrap">
+    <div class="filters__head">
+      <span class="eyebrow center reveal">Filtration</span>
+      <h2 class="reveal" data-delay="1">What we take out, <em>before we add anything back.</em></h2>
+    </div>
+    <div class="filters__grid">
+      <div class="fcard reveal">
+        <div class="fcard__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h14l-2 9v5a2 2 0 01-2 2h-2l-3-2v-5L5 4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3>Sediment &amp; particulates</h3>
+        <p>The internal filter reduces rust, sand, and fine sediment carried in on aging pipes.</p>
+      </div>
+      <div class="fcard reveal" data-delay="1">
+        <div class="fcard__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>Chlorine &amp; taste</h3>
+        <p>Activated carbon reduces chlorine and the taste-and-odor compounds that make tap water tap water.</p>
+      </div>
+      <div class="fcard reveal" data-delay="2">
+        <div class="fcard__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3>Clean, then ionized</h3>
+        <p>Water is filtered <em>before</em> electrolysis — so every pH level starts from a cleaner baseline.</p>
+      </div>
+      <div class="fcard reveal" data-delay="3">
+        <div class="fcard__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20c2-1 4-1 6 0M4 16c2-1 4-1 6 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 4l2 2-6 6-2.5.5.5-2.5 6-6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3>Anespa® for the whole shower</h3>
+        <p>Ask us about Anespa — a dedicated system that softens and dechlorinates your shower and bath water.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLASSES -->
+<section class="section" id="classes">
+  <div class="wrap">
+    <div class="menu__head">
+      <div>
+        <span class="eyebrow reveal">Water Classes</span>
+        <h2 class="reveal" data-delay="1" style="margin-top:18px">Come learn the water. <em>The first taste is on us.</em></h2>
+      </div>
+      <p class="lead reveal" data-delay="2">Our weekly class is the easiest way to understand what all the fuss is about — no pressure, no purchase, just water and answers.</p>
+    </div>
+    <div class="classes__grid">
+      <div class="classcard classcard--free reveal">
+        <span class="tag">Free · Every week</span>
+        <h3>The Free Water Class</h3>
+        <p>Anka walks you through the five waters, side-by-side taste tests against your usual bottle and tap, and the science of hydrogen-rich water — start to finish, in about an hour.</p>
+        <div class="classcard__meta">
+          <div class="m"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 9h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Held weekly — see current time</div>
+          <div class="m"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.4 7-11a7 7 0 10-14 0c0 4.6 7 11 7 11z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.5"/></svg>At the Occoquan showroom</div>
+          <div class="m"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 20a5 5 0 00-10 0M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Seats are limited</div>
+        </div>
+        <a class="btn btn--aqua" href="#reserve">Reserve my seat
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="classcard classcard--private reveal" data-delay="1">
+        <div>
+          <span class="tag">Private · By request</span>
+          <h3>Private Water Class</h3>
+          <p>Bring your family, team, or friends for a private tasting built around your questions — in-store or hosted at your home.</p>
+        </div>
+        <div>
+          <div class="classcard__meta">
+            <div class="m"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 20a5 5 0 00-10 0M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Your group, your pace</div>
+          </div>
+          <a class="rabbit" href="private-class.html">Go down the rabbit hole → the private class
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEMS (CTA only, link out) -->
+<section class="section systems" id="systems">
+  <div class="wrap">
+    <div class="systems__head">
+      <span class="eyebrow center reveal">The Systems</span>
+      <h2 class="reveal" data-delay="1">The machines behind the counter — <em>see them, then take one home.</em></h2>
+    </div>
+    <div class="systems__row">
+      <div class="sys reveal"><div class="k">K8</div><div class="t">The flagship</div><p>Eight plates, maximum performance — our most-recommended countertop system.</p></div>
+      <div class="sys reveal" data-delay="1"><div class="k">SD501</div><div class="t">The classic</div><p>The system that built the category — dependable, powerful, proven.</p></div>
+      <div class="sys reveal" data-delay="2"><div class="k">JR IV</div><div class="t">The starter</div><p>A compact, approachable entry into Kangen Water® for smaller kitchens.</p></div>
+      <div class="sys reveal" data-delay="3"><div class="k">Anespa®</div><div class="t">The shower</div><p>Dechlorinated, mineral-rich water for your whole shower and bath.</p></div>
+    </div>
+    <div class="systems__cta reveal">
+      <div>
+        <h3>Pricing, models, and financing live on the official Enagic® store.</h3>
+        <p>We keep buying off this site on purpose — see every model, warranty, and current offer straight from the source, then come try it in person.</p>
+      </div>
+      <a class="btn btn--aqua" href="http://cravekangen.enagicweb.info/" target="_blank" rel="noopener">Explore the machines
+        <svg class="ext" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS / MARKETING SOFTWARE -->
+<section class="section" id="business">
+  <div class="wrap">
+    <div class="biz__grid">
+      <div class="biz__copy">
+        <span class="eyebrow reveal">Build a business</span>
+        <h2 class="reveal" data-delay="1">Love the water? <em>You can share it — and get paid to.</em></h2>
+        <p class="reveal" data-delay="2">Every bottle you'd have bought is a conversation you could own. As an Enagic® distributor you sell a product people can taste before they buy — and we hand you the toolkit to actually run it like a business.</p>
+        <ul class="biz__list reveal" data-delay="3">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Start with a product you already believe in</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Mentorship from Virginia's first showroom</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Our marketing software to find and follow up with customers</li>
+        </ul>
+        <div class="biz__actions reveal" data-delay="4">
+          <a class="btn btn--ink btn--ghost" href="#reserve">Talk to us about joining</a>
+          <a class="btn btn--brass" href="http://cravekangen.enagicweb.net/" target="_blank" rel="noopener">See the opportunity
+            <svg class="ext" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="biz__panel reveal" data-delay="1">
+        <span class="eyebrow">The toolkit</span>
+        <h3>The marketing software <em>we run ourselves.</em></h3>
+        <div class="biz__feat">
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16v11H8l-4 3V5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><div><div class="k">Capture &amp; follow-up</div><div class="d">Turn class sign-ups and demos into a pipeline that follows up for you.</div></div></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M3 9h18" stroke="currentColor" stroke-width="1.5"/></svg><div><div class="k">Pages &amp; funnels</div><div class="d">Landing pages and booking flows built for water demos, ready to share.</div></div></div>
+          <div class="row"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div><div class="k">Know what's working</div><div class="d">See which conversations convert so you spend time on the right ones.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section reviews">
+  <div class="wrap">
+    <div class="reviews__head">
+      <div>
+        <span class="eyebrow reveal">In their words</span>
+        <h2 class="reveal" data-delay="1">Virginia is lucky to have this one — <em>and our guests say so.</em></h2>
+      </div>
+      <div class="reviews__score reveal" data-delay="1">
+        <div class="s">4.7</div>
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <div class="c">Rated by guests on Google &amp; Yelp</div>
+      </div>
+    </div>
+    <div class="reviews__grid">
+      <div class="rev reveal">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <p>"I used to get leg cramps almost every night. Since drinking this water, I don't get them at all."</p>
+        <div class="by">Verified guest review</div>
+      </div>
+      <div class="rev reveal" data-delay="1">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <p>"Learned a whole lot about water — and I love it. Can't wait to see my family's full transformation."</p>
+        <div class="by">Verified guest review</div>
+      </div>
+      <div class="rev reveal" data-delay="2">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <p>"A real Enagic showroom right here in Virginia. Anka's demo made it all make sense — taste it and you'll get it."</p>
+        <div class="by">Verified guest review</div>
+      </div>
+    </div>
+    <div style="margin-top:34px" class="reveal">
+      <a class="btn btn--ghost-dark" href="https://maps.app.goo.gl/UW6DSXTrqLTnHVTF6" target="_blank" rel="noopener">Read every review on Google
+        <svg class="ext" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT (location + hours + contact folded in) -->
+<section class="section" id="visit">
+  <div class="wrap">
+    <div class="visit__grid">
+      <div class="visit__info">
+        <span class="eyebrow reveal">Visit &amp; Contact</span>
+        <h2 class="reveal" data-delay="1">Come taste it <em>on Union Street.</em></h2>
+        <div class="visit__rows reveal" data-delay="2">
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.4 7-11a7 7 0 10-14 0c0 4.6 7 11 7 11z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.5"/></svg>
+            <div><div class="k">Showroom</div><div class="v"><a href="https://maps.app.goo.gl/UW6DSXTrqLTnHVTF6" target="_blank" rel="noopener">206 Union Street, Unit 101 · Occoquan, VA 22125</a></div></div>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 4h4l2 5-3 2a11 11 0 005 5l2-3 5 2v4a2 2 0 01-2 2A16 16 0 014 6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            <div><div class="k">Call or text</div><div class="v"><a href="tel:+17035654854">(703) 565-4854</a></div></div>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l7 5 7-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><div class="k">Email</div><div class="v"><a href="mailto:hello@cravekangen.com">hello@cravekangen.com</a></div></div>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><div class="k">Hours</div>
+              <div class="hours" id="hours">
+                <div class="h" data-day="1"><span>Monday</span><span>Closed</span></div>
+                <div class="h" data-day="2"><span>Tuesday</span><span>10am – 6pm</span></div>
+                <div class="h" data-day="3"><span>Wednesday</span><span>10am – 7pm</span></div>
+                <div class="h" data-day="4"><span>Thursday</span><span>10am – 7pm</span></div>
+                <div class="h" data-day="5"><span>Friday</span><span>10am – 7pm</span></div>
+                <div class="h" data-day="6"><span>Saturday</span><span>10am – 7pm</span></div>
+                <div class="h" data-day="0"><span>Sunday</span><span>10am – 5pm</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="map reveal" data-delay="2">
+          <div class="map__lines" aria-hidden="true"></div>
+          <div class="map__pin"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.4 7-11a7 7 0 10-14 0c0 4.6 7 11 7 11z" fill="#fff" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.5"/></svg><div class="lbl">Crave Kangen · 206 Union St</div></div>
+          <a class="open" href="https://maps.app.goo.gl/UW6DSXTrqLTnHVTF6" target="_blank" rel="noopener">Open in Maps
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="14" height="14"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <form class="bform reveal" data-delay="1" id="reserveForm" novalidate>
+        <span id="reserve"></span>
+        <h3>Reserve a class or demo</h3>
+        <p class="sub">Tell us you're coming and we'll save you a spot at the water bar.</p>
+        <div class="field">
+          <label for="name">Name <span class="req" aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" required placeholder="Your name" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@email.com" />
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(703) 555-0100" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="interest">I'm interested in</label>
+          <select id="interest" name="interest">
+            <option>The free weekly water class</option>
+            <option>A private class for my group</option>
+            <option>A one-on-one machine demo</option>
+            <option>Becoming an Enagic distributor</option>
+            <option>The marketing software</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="notes">Anything else?</label>
+          <textarea id="notes" name="notes" placeholder="How many guests, best days/times, questions…"></textarea>
+          <div class="hint">Prefer to talk now? Call or text (703) 565-4854.</div>
+        </div>
+        <button class="btn btn--aqua" type="submit">Send my request
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Thanks — we'll be in touch to confirm your spot. See you on Union Street.</span>
+        </div>
+        <p class="form-note">No payment now. We'll only use your details to confirm your visit.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brandcol">
+        <a class="brand" href="#" aria-label="Crave Kangen home">
+          <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="15" stroke="#A6DEE0" stroke-width="1.3"/>
+            <path d="M16 6c3.5 4 5.5 6.6 5.5 9.6a5.5 5.5 0 11-11 0C10.5 12.6 12.5 10 16 6z" stroke="#3FB6BC" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
+          </svg>
+          <span>Crave Kangen<small>Occoquan · Virginia</small></span>
+        </a>
+        <p class="footer__blurb">Virginia's first Enagic® showroom. Taste hydrogen-rich Kangen Water®, learn the science, and see the machines — right on Union Street in historic Occoquan.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/cravekangen/" target="_blank" rel="noopener" aria-label="Crave Kangen on Instagram"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="7" r="1" fill="currentColor"/></svg></a>
+          <a href="https://www.facebook.com/cravekangen/" target="_blank" rel="noopener" aria-label="Crave Kangen on Facebook"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 8h2V5h-2c-1.7 0-3 1.3-3 3v2H9v3h2v6h3v-6h2l1-3h-3V8.5c0-.3.2-.5.5-.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></a>
+          <a href="https://www.tiktok.com/tag/cravekangen" target="_blank" rel="noopener" aria-label="Crave Kangen on TikTok"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 4c.4 2.4 1.9 3.9 4 4.2M15 4v9.5a4 4 0 11-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#menu">The Menu</a></li>
+          <li><a href="#water">The Water</a></li>
+          <li><a href="#filters">Filtration</a></li>
+          <li><a href="#classes">Free Class</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Take action</h4>
+        <ul>
+          <li><a href="http://cravekangen.enagicweb.info/" target="_blank" rel="noopener">Shop machines ↗</a></li>
+          <li><a href="#business">Become a distributor</a></li>
+          <li><a href="private-class.html">Private class</a></li>
+          <li><a href="#reserve">Reserve a seat</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <p class="footer__blurb" style="margin-top:0">206 Union Street, Unit 101<br>Occoquan, VA 22125<br><a href="tel:+17035654854" style="color:var(--aqua-lt)">(703) 565-4854</a></p>
+      </div>
+    </div>
+    <div class="footer__bot">
+      <span>© 2026 Crave Kangen · Independent Enagic® Distributor · Occoquan, Virginia</span>
+      <span style="display:flex;gap:22px;flex-wrap:wrap"><a href="#">Privacy</a><a href="#visit">Contact</a></span>
+    </div>
+    <p class="footer__disc">Kangen Water®, Enagic®, and Anespa® are registered trademarks of Enagic Co., Ltd. Crave Kangen is an independent Enagic distributor. Statements about water have not been evaluated by the FDA and are not intended to diagnose, treat, cure, or prevent any disease. Individual experiences vary.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var nav = document.getElementById("nav");
+  function onScroll(){ nav.classList.toggle("is-condensed", window.scrollY > 24); }
+  window.addEventListener("scroll", onScroll, { passive:true }); onScroll();
+
+  var toggle=document.getElementById("navToggle"), menu=document.getElementById("mobileMenu"), scrim=document.getElementById("scrim");
+  function setMenu(open){
+    nav.classList.toggle("is-open", open);
+    menu.classList.toggle("is-open", open);
+    scrim.classList.toggle("is-open", open); scrim.hidden=!open;
+    toggle.setAttribute("aria-expanded", open?"true":"false");
+    toggle.setAttribute("aria-label", open?"Close menu":"Open menu");
+    document.body.style.overflow = open?"hidden":"";
+  }
+  toggle.addEventListener("click", function(){ setMenu(!menu.classList.contains("is-open")); });
+  scrim.addEventListener("click", function(){ setMenu(false); });
+  menu.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", function(){ setMenu(false); }); });
+  window.addEventListener("keydown", function(e){ if(e.key==="Escape") setMenu(false); });
+
+  var reveals=document.querySelectorAll(".reveal");
+  if(reduced || !("IntersectionObserver" in window)){ reveals.forEach(function(el){ el.classList.add("in"); }); }
+  else{
+    var io=new IntersectionObserver(function(entries){ entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { threshold:0.14, rootMargin:"0px 0px -8% 0px" });
+    reveals.forEach(function(el){ io.observe(el); });
+  }
+
+  function animateCount(el){
+    var target=parseFloat(el.getAttribute("data-count"));
+    var decimals=parseInt(el.getAttribute("data-decimals")||"0",10);
+    if(reduced){ el.textContent=target.toFixed(decimals); return; }
+    var start=performance.now(), dur=1400;
+    (function frame(now){
+      var p=Math.min((now-start)/dur,1), eased=1-Math.pow(1-p,3);
+      el.textContent=(target*eased).toFixed(decimals);
+      if(p<1) requestAnimationFrame(frame); else el.textContent=target.toFixed(decimals);
+    })(start);
+  }
+  var counters=document.querySelectorAll("[data-count]");
+  if("IntersectionObserver" in window){
+    var cio=new IntersectionObserver(function(entries){ entries.forEach(function(en){
+      if(en.isIntersecting){ animateCount(en.target); cio.unobserve(en.target); } }); }, { threshold:0.6 });
+    counters.forEach(function(el){ cio.observe(el); });
+  } else { counters.forEach(animateCount); }
+
+  // highlight today's hours
+  var today=new Date().getDay();
+  var row=document.querySelector('.hours .h[data-day="'+today+'"]');
+  if(row) row.classList.add("today");
+
+  var form=document.getElementById("reserveForm"), success=document.getElementById("formSuccess");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name=form.querySelector("#name"), email=form.querySelector("#email"), ok=true;
+    [name,email].forEach(function(f){
+      var bad = !f.value.trim() || (f.type==="email" && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.value));
+      if(bad){ f.style.borderColor="#C0522C"; f.setAttribute("aria-invalid","true"); ok=false; }
+      else{ f.style.borderColor=""; f.removeAttribute("aria-invalid"); }
+    });
+    if(!ok){ (name.value.trim()?email:name).focus(); return; }
+    success.classList.add("is-visible");
+    form.querySelector("button[type=submit]").style.display="none";
+    success.scrollIntoView({ behavior: reduced?"auto":"smooth", block:"center" });
+    form.reset();
+  });
+})();
+</script>
+</body>
+</html>
