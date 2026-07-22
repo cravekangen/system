@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Confluence — Water Wellness on the Occoquan</title>
+<meta name="description" content="Confluence is a riverside water wellness house in Occoquan, Virginia. Float, thermal circuit, mineral soak, and contrast therapy — a modern bathing ritual at the end of the water." />
+<meta name="theme-color" content="#0D3B38" />
+<meta property="og:title" content="Confluence — Water Wellness on the Occoquan" />
+<meta property="og:description" content="A riverside bathing house in Occoquan, Virginia. Float, soak, sauna, cold plunge — restore by the water." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@300;400;500;600&display=swap" />
+
+<style>
+/* ============================================================
+   CONFLUENCE — Water Wellness, Occoquan VA
+   Self-contained. No framework, no JS libraries.
+   Palette + type grounded via ui-ux-pro-max, overridden to
+   the subject (river water) instead of the templated spa pink.
+   ============================================================ */
+
+:root{
+  /* Water-derived palette */
+  --ink:      #12211F;   /* near-black teal, primary text */
+  --deep:     #0C3A37;   /* deep petrol, hero ground */
+  --deep-2:   #0A2E2C;   /* deeper shade */
+  --teal:     #1F6E64;   /* mid water */
+  --aqua:     #6FB3A8;   /* misty aqua */
+  --aqua-lt:  #A9D3CB;   /* light mist */
+  --brass:    #C0A16B;   /* warm brass accent */
+  --brass-dk: #9E8149;
+  --paper:    #F4F1EA;   /* warm limestone mist */
+  --paper-2:  #FBFAF6;   /* lighter card */
+  --sand:     #E7DFCF;
+  --muted:    #5E6E6A;   /* muted text */
+  --line:     rgba(18,33,31,.12);
+  --line-lt:  rgba(255,255,255,.14);
+
+  --maxw: 1240px;
+  --gutter: clamp(20px, 5vw, 64px);
+
+  /* spacing scale (density ~4/10, spacious editorial) */
+  --s-1: 8px;  --s-2: 16px; --s-3: 24px; --s-4: 40px;
+  --s-5: 64px; --s-6: 96px; --s-7: 140px;
+
+  --ease: cubic-bezier(.22,.61,.36,1);
+  --ease-out: cubic-bezier(.16,1,.3,1);
+  --dur: .6s;
+
+  --radius: 18px;
+  --radius-lg: 28px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+body{
+  margin:0;
+  font-family:"Inter", system-ui, -apple-system, sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+
+h1,h2,h3,h4{
+  font-family:"Fraunces", Georgia, serif;
+  font-weight:400;
+  line-height:1.04;
+  letter-spacing:-.015em;
+  margin:0;
+  font-optical-sizing:auto;
+}
+
+p{ margin:0; }
+a{ color:inherit; text-decoration:none; }
+img{ max-width:100%; display:block; }
+
+/* ---------- layout helpers ---------- */
+.wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gutter); }
+.section{ padding-block:clamp(64px,10vw,var(--s-7)); position:relative; }
+section[id]{ scroll-margin-top:96px; }
+.eyebrow{
+  font-family:"Inter",sans-serif; font-weight:500; font-size:12px;
+  letter-spacing:.28em; text-transform:uppercase; color:var(--teal);
+  display:inline-flex; align-items:center; gap:10px;
+}
+.eyebrow::before{ content:""; width:26px; height:1px; background:var(--brass); display:inline-block; }
+.eyebrow.center::after{ content:""; width:26px; height:1px; background:var(--brass); display:inline-block; }
+.lead{ font-size:clamp(19px,2.2vw,22px); color:var(--muted); line-height:1.6; max-width:56ch; }
+
+/* focus visibility (a11y) */
+a:focus-visible, button:focus-visible, input:focus-visible, .btn:focus-visible{
+  outline:2px solid var(--brass); outline-offset:3px; border-radius:6px;
+}
+
+/* skip link */
+.skip{ position:absolute; left:-9999px; top:0; background:var(--ink); color:var(--paper);
+  padding:12px 18px; z-index:200; border-radius:0 0 10px 0; }
+.skip:focus{ left:0; }
+
+/* ---------- buttons ---------- */
+.btn{
+  --bg:var(--ink); --fg:var(--paper);
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  font-family:"Inter",sans-serif; font-weight:500; font-size:15px; letter-spacing:.01em;
+  padding:15px 26px; border-radius:100px; cursor:pointer; border:1px solid transparent;
+  background:var(--bg); color:var(--fg); position:relative; isolation:isolate;
+  transition:transform .3s var(--ease-out), box-shadow .3s var(--ease-out), background .3s var(--ease), color .3s var(--ease);
+  will-change:transform; min-height:48px;
+}
+.btn svg{ width:17px; height:17px; transition:transform .35s var(--ease-out); }
+.btn:hover{ transform:translateY(-2px); box-shadow:0 14px 30px -12px rgba(12,58,55,.5); }
+.btn:hover svg{ transform:translateX(4px); }
+.btn:active{ transform:translateY(0); }
+.btn--brass{ --bg:var(--brass); --fg:#1a1405; }
+.btn--brass:hover{ --bg:#cbae7a; }
+.btn--ghost{ --bg:transparent; --fg:var(--ink); border-color:var(--line); }
+.btn--ghost:hover{ border-color:var(--ink); box-shadow:none; background:rgba(18,33,31,.03); }
+.btn--on-dark{ --bg:var(--paper); --fg:var(--ink); }
+.btn--ghost-dark{ --bg:transparent; --fg:var(--paper); border-color:var(--line-lt); }
+.btn--ghost-dark:hover{ border-color:var(--aqua-lt); background:rgba(255,255,255,.06); box-shadow:none; }
+
+/* ==================================================
+   TOP BAR + NAV
+   ================================================== */
+.topbar{
+  background:var(--deep-2); color:var(--aqua-lt);
+  font-size:12.5px; letter-spacing:.06em; text-align:center;
+  padding:9px 16px;
+}
+.topbar strong{ color:var(--paper); font-weight:500; }
+
+.nav{
+  position:sticky; top:0; z-index:100;
+  background:color-mix(in srgb, var(--paper) 78%, transparent);
+  backdrop-filter:blur(14px) saturate(1.1);
+  -webkit-backdrop-filter:blur(14px) saturate(1.1);
+  border-bottom:1px solid transparent;
+  transition:padding .4s var(--ease), background .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+}
+.nav__inner{ display:flex; align-items:center; justify-content:space-between; gap:24px;
+  padding-block:22px; transition:padding .4s var(--ease); }
+.nav.is-condensed{ box-shadow:0 1px 0 var(--line); border-color:var(--line);
+  background:color-mix(in srgb, var(--paper) 92%, transparent); }
+.nav.is-condensed .nav__inner{ padding-block:13px; }
+
+.brand{ display:inline-flex; align-items:center; gap:11px; font-family:"Fraunces",serif;
+  font-size:23px; letter-spacing:-.01em; color:var(--ink); }
+.brand .mark{ width:30px; height:30px; flex:0 0 auto; }
+.brand small{ display:block; font-family:"Inter",sans-serif; font-size:9.5px; letter-spacing:.34em;
+  text-transform:uppercase; color:var(--teal); margin-top:2px; }
+
+.nav__links{ display:flex; align-items:center; gap:34px; list-style:none; margin:0; padding:0; }
+.nav__links a{ font-size:14.5px; color:var(--ink); position:relative; padding:4px 0;
+  font-weight:450; }
+.nav__links a::after{ content:""; position:absolute; left:0; bottom:-2px; height:1px; width:0;
+  background:var(--brass); transition:width .35s var(--ease-out); }
+.nav__links a:hover::after{ width:100%; }
+.nav__cta{ display:flex; align-items:center; gap:14px; }
+
+.nav__toggle{ display:none; background:none; border:0; cursor:pointer; padding:8px;
+  width:44px; height:44px; }
+.nav__toggle span{ display:block; width:24px; height:1.6px; background:var(--ink);
+  margin:5px auto; transition:transform .35s var(--ease), opacity .3s; }
+.nav.is-open .nav__toggle span:nth-child(1){ transform:translateY(6.6px) rotate(45deg); }
+.nav.is-open .nav__toggle span:nth-child(2){ opacity:0; }
+.nav.is-open .nav__toggle span:nth-child(3){ transform:translateY(-6.6px) rotate(-45deg); }
+
+@media (max-width:960px){
+  .nav__links, .nav__cta .btn{ display:none; }
+  .nav__toggle{ display:block; }
+  .mobile-menu{ position:fixed; inset:0 0 0 auto; width:min(86vw,380px); z-index:99;
+    background:var(--deep); color:var(--paper); padding:100px 32px 40px;
+    transform:translateX(100%); transition:transform .5s var(--ease-out);
+    display:flex; flex-direction:column; gap:6px; box-shadow:-20px 0 60px -20px rgba(0,0,0,.5); }
+  .nav.is-open + .mobile-menu, .mobile-menu.is-open{ transform:translateX(0); }
+  .mobile-menu a{ font-family:"Fraunces",serif; font-size:26px; padding:14px 0;
+    border-bottom:1px solid var(--line-lt); color:var(--paper); }
+  .mobile-menu .btn{ margin-top:22px; }
+  .scrim{ position:fixed; inset:0; background:rgba(8,20,19,.5); z-index:98; opacity:0;
+    visibility:hidden; transition:opacity .4s; backdrop-filter:blur(2px); }
+  .scrim.is-open{ opacity:1; visibility:visible; }
+}
+.mobile-menu{ display:none; }
+@media (max-width:960px){ .mobile-menu{ display:flex; } }
+
+/* ==================================================
+   HERO
+   ================================================== */
+.hero{
+  position:relative; background:var(--deep); color:var(--paper);
+  overflow:hidden; isolation:isolate;
+}
+.hero__water{ position:absolute; inset:0; z-index:-2; overflow:hidden; }
+/* layered drifting water gradients (GPU friendly: transform/opacity only) */
+.hero__water span{ position:absolute; border-radius:50%; filter:blur(60px); opacity:.55;
+  will-change:transform; }
+.hero__water .w1{ width:60vw; height:60vw; left:-10vw; top:-20vw;
+  background:radial-gradient(circle at 30% 30%, var(--teal), transparent 62%);
+  animation:drift1 22s var(--ease) infinite alternate; }
+.hero__water .w2{ width:52vw; height:52vw; right:-14vw; top:6vw;
+  background:radial-gradient(circle at 60% 40%, #17847a, transparent 60%);
+  animation:drift2 26s var(--ease) infinite alternate; }
+.hero__water .w3{ width:40vw; height:40vw; left:24vw; bottom:-16vw;
+  background:radial-gradient(circle at 50% 50%, #0f5a54, transparent 64%);
+  animation:drift3 30s var(--ease) infinite alternate; }
+.hero__grain{ position:absolute; inset:0; z-index:-1; opacity:.5; pointer-events:none;
+  background:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.10), transparent),
+    radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,.08), transparent),
+    radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.06), transparent);
+  background-size:140px 140px, 200px 200px, 170px 170px; }
+
+@keyframes drift1{ to{ transform:translate3d(8vw,6vw,0) scale(1.15); } }
+@keyframes drift2{ to{ transform:translate3d(-7vw,4vw,0) scale(1.1); } }
+@keyframes drift3{ to{ transform:translate3d(4vw,-6vw,0) scale(1.2); } }
+
+.hero__inner{ padding-block:clamp(80px,13vw,168px) 0; position:relative; }
+.hero__eyebrow{ color:var(--aqua-lt); }
+.hero__eyebrow::before{ background:var(--brass); }
+.hero h1{
+  font-size:clamp(46px, 8.5vw, 108px);
+  font-weight:340; letter-spacing:-.03em; margin-top:26px;
+  max-width:15ch;
+}
+.hero h1 em{ font-style:italic; color:var(--aqua-lt); font-weight:340; }
+.hero__sub{ margin-top:28px; font-size:clamp(17px,2vw,20px); color:rgba(244,241,234,.82);
+  max-width:52ch; line-height:1.6; }
+.hero__actions{ margin-top:38px; display:flex; flex-wrap:wrap; gap:14px; }
+
+.hero__meta{ margin-top:clamp(48px,7vw,84px); padding:26px 0 40px;
+  border-top:1px solid var(--line-lt);
+  display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+.hero__meta div .n{ font-family:"Fraunces",serif; font-size:clamp(26px,3.4vw,40px);
+  color:var(--paper); font-weight:400; letter-spacing:-.02em; }
+.hero__meta div .l{ font-size:12.5px; color:var(--aqua-lt); letter-spacing:.1em;
+  text-transform:uppercase; margin-top:4px; }
+@media (max-width:720px){ .hero__meta{ grid-template-columns:repeat(2,1fr); row-gap:30px; } }
+
+/* wave divider bottom of hero */
+.wave{ display:block; width:100%; height:auto; margin-bottom:-6px; position:relative; z-index:2; }
+.wave path{ fill:var(--paper); }
+.hero__waves{ position:relative; margin-top:clamp(20px,4vw,40px); }
+
+/* animated scroll cue */
+.scrollcue{ position:absolute; left:50%; bottom:96px; transform:translateX(-50%);
+  writing-mode:vertical-rl; font-size:11px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--aqua-lt); display:flex; align-items:center; gap:14px; opacity:.9; }
+.scrollcue::after{ content:""; width:1px; height:46px; background:linear-gradient(var(--aqua-lt),transparent);
+  animation:cue 2.4s var(--ease) infinite; transform-origin:top; }
+@keyframes cue{ 0%{ transform:scaleY(.2); opacity:0;} 40%{opacity:1;} 100%{ transform:scaleY(1); opacity:0; } }
+@media (max-width:960px){ .scrollcue{ display:none; } }
+
+/* ==================================================
+   ETHOS / STATEMENT
+   ================================================== */
+.ethos{ text-align:center; }
+.ethos .wrap{ max-width:960px; }
+.ethos h2{ font-size:clamp(28px,4.6vw,52px); font-weight:340; letter-spacing:-.02em;
+  line-height:1.12; }
+.ethos h2 em{ font-style:italic; color:var(--teal); }
+.ethos .place{ margin-top:34px; display:inline-flex; align-items:center; gap:12px;
+  font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+.ethos .place svg{ width:16px; height:16px; color:var(--brass); }
+
+/* ==================================================
+   THE WATERS (experiences)
+   ================================================== */
+.waters__head{ display:flex; align-items:flex-end; justify-content:space-between;
+  gap:32px; flex-wrap:wrap; margin-bottom:clamp(36px,5vw,60px); }
+.waters__head h2{ font-size:clamp(32px,5vw,58px); font-weight:340; max-width:16ch; }
+.waters__head h2 em{ font-style:italic; color:var(--teal); }
+
+.waters__grid{ display:grid; grid-template-columns:repeat(12,1fr); gap:20px; }
+.wcard{ position:relative; border-radius:var(--radius-lg); overflow:hidden;
+  background:var(--paper-2); border:1px solid var(--line); padding:30px 28px;
+  min-height:290px; display:flex; flex-direction:column; justify-content:space-between;
+  transition:transform .5s var(--ease-out), box-shadow .5s var(--ease-out), border-color .4s;
+  isolation:isolate; }
+.wcard::before{ content:""; position:absolute; inset:0; z-index:-1; opacity:.9;
+  transition:opacity .5s var(--ease); }
+.wcard:hover{ transform:translateY(-6px); box-shadow:0 30px 60px -30px rgba(12,58,55,.35);
+  border-color:transparent; }
+.wcard__tag{ font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--teal); }
+.wcard h3{ font-size:clamp(24px,2.4vw,30px); margin-top:14px; font-weight:400; }
+.wcard p{ color:var(--muted); font-size:15px; margin-top:12px; max-width:34ch; }
+.wcard__foot{ margin-top:22px; display:flex; align-items:center; justify-content:space-between; }
+.wcard__temp{ font-family:"Fraunces",serif; font-size:15px; color:var(--ink); opacity:.7; }
+.wcard__ico{ width:44px; height:44px; border-radius:50%; display:grid; place-items:center;
+  background:var(--paper); border:1px solid var(--line); color:var(--teal);
+  transition:background .4s var(--ease), color .4s, transform .4s var(--ease-out); }
+.wcard:hover .wcard__ico{ background:var(--ink); color:var(--paper); transform:rotate(-8deg); }
+.wcard__ico svg{ width:20px; height:20px; }
+
+/* feature spans */
+.wcard.span-7{ grid-column:span 7; }
+.wcard.span-5{ grid-column:span 5; }
+.wcard.span-4{ grid-column:span 4; }
+.wcard.span-8{ grid-column:span 8; }
+
+/* accent (dark) card */
+.wcard--dark{ background:var(--deep); color:var(--paper); border-color:transparent; }
+.wcard--dark::before{
+  background:radial-gradient(120% 120% at 80% 10%, rgba(31,110,100,.55), transparent 60%),
+             radial-gradient(90% 90% at 10% 100%, rgba(111,179,168,.25), transparent 60%);
+}
+.wcard--dark .wcard__tag{ color:var(--aqua-lt); }
+.wcard--dark p{ color:rgba(244,241,234,.8); }
+.wcard--dark .wcard__temp{ color:var(--paper); opacity:.85; }
+.wcard--dark .wcard__ico{ background:rgba(255,255,255,.08); border-color:var(--line-lt); color:var(--aqua-lt); }
+.wcard--dark:hover .wcard__ico{ background:var(--paper); color:var(--ink); }
+
+.wcard--mist::before{ background:linear-gradient(160deg, #eef4f2, #F4F1EA); }
+.wcard--sand::before{ background:linear-gradient(160deg, #f2ebdd, #FBFAF6); }
+
+@media (max-width:900px){
+  .waters__grid{ grid-template-columns:repeat(6,1fr); }
+  .wcard.span-7,.wcard.span-8{ grid-column:span 6; }
+  .wcard.span-5,.wcard.span-4{ grid-column:span 3; }
+}
+@media (max-width:620px){
+  .wcard{ grid-column:span 6 !important; min-height:240px; }
+}
+
+/* ==================================================
+   THE RITUAL (numbered sequence — order is real info)
+   ================================================== */
+.ritual{ background:var(--deep); color:var(--paper); position:relative; overflow:hidden; }
+.ritual::before{ content:""; position:absolute; inset:0; opacity:.5;
+  background:radial-gradient(70% 60% at 85% 0%, rgba(31,110,100,.5), transparent 60%); }
+.ritual .wrap{ position:relative; }
+.ritual__head{ max-width:640px; margin-bottom:clamp(44px,6vw,72px); }
+.ritual__head .eyebrow{ color:var(--aqua-lt); }
+.ritual__head h2{ font-size:clamp(32px,5vw,56px); font-weight:340; margin-top:22px; }
+.ritual__head h2 em{ font-style:italic; color:var(--aqua-lt); }
+
+.steps{ display:grid; grid-template-columns:repeat(5,1fr); gap:0;
+  border-top:1px solid var(--line-lt); }
+.step{ padding:34px 24px 34px 0; border-right:1px solid var(--line-lt); position:relative; }
+.step:last-child{ border-right:0; }
+.step__n{ font-family:"Fraunces",serif; font-size:15px; color:var(--brass);
+  letter-spacing:.05em; }
+.step__dot{ width:11px; height:11px; border-radius:50%; background:var(--aqua);
+  position:absolute; top:-6px; left:0; box-shadow:0 0 0 4px var(--deep); }
+.step h3{ font-size:clamp(20px,2.1vw,26px); font-weight:400; margin-top:20px; }
+.step p{ color:rgba(244,241,234,.72); font-size:14.5px; margin-top:10px; max-width:26ch; }
+.step__min{ margin-top:16px; font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--aqua-lt); }
+@media (max-width:920px){ .steps{ grid-template-columns:repeat(2,1fr); }
+  .step{ border-right:0; border-bottom:1px solid var(--line-lt); padding-right:24px; } }
+@media (max-width:520px){ .steps{ grid-template-columns:1fr; } }
+
+/* ==================================================
+   MEMBERSHIP
+   ================================================== */
+.plans__head{ text-align:center; max-width:640px; margin-inline:auto; margin-bottom:clamp(40px,5vw,64px); }
+.plans__head h2{ font-size:clamp(32px,5vw,56px); font-weight:340; margin-top:20px; }
+.plans__head h2 em{ font-style:italic; color:var(--teal); }
+.plans__head p{ margin-top:18px; }
+.plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch; }
+.plan{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius-lg);
+  padding:34px 30px; display:flex; flex-direction:column;
+  transition:transform .5s var(--ease-out), box-shadow .5s var(--ease-out); }
+.plan:hover{ transform:translateY(-6px); box-shadow:0 30px 60px -30px rgba(12,58,55,.3); }
+.plan__name{ font-family:"Fraunces",serif; font-size:24px; }
+.plan__desc{ color:var(--muted); font-size:14.5px; margin-top:8px; min-height:44px; }
+.plan__price{ margin-top:24px; display:flex; align-items:baseline; gap:6px; }
+.plan__price .amt{ font-family:"Fraunces",serif; font-size:52px; letter-spacing:-.02em; }
+.plan__price .per{ color:var(--muted); font-size:14px; }
+.plan__list{ list-style:none; margin:26px 0 0; padding:0; display:grid; gap:13px; }
+.plan__list li{ display:flex; gap:12px; align-items:flex-start; font-size:15px; color:var(--ink); }
+.plan__list svg{ width:18px; height:18px; color:var(--teal); flex:0 0 auto; margin-top:2px; }
+.plan .btn{ margin-top:30px; width:100%; }
+.plan--feature{ background:var(--deep); color:var(--paper); border-color:transparent;
+  position:relative; overflow:hidden; }
+.plan--feature::before{ content:""; position:absolute; inset:0; z-index:0; opacity:.6;
+  background:radial-gradient(90% 80% at 90% 0%, rgba(31,110,100,.5), transparent 60%); }
+.plan--feature > *{ position:relative; z-index:1; }
+.plan--feature .plan__desc{ color:var(--aqua-lt); }
+.plan--feature .plan__list li{ color:var(--paper); }
+.plan--feature .plan__list svg{ color:var(--aqua); }
+.plan__badge{ position:absolute; top:20px; right:20px; z-index:2; font-size:11px;
+  letter-spacing:.14em; text-transform:uppercase; color:#1a1405; background:var(--brass);
+  padding:6px 12px; border-radius:100px; }
+@media (max-width:900px){ .plans{ grid-template-columns:1fr; max-width:440px; margin-inline:auto; } }
+
+/* ==================================================
+   THE SPACE (gallery — CSS water panels)
+   ================================================== */
+.space__grid{ display:grid; grid-template-columns:repeat(12,1fr);
+  grid-auto-rows:170px; gap:16px; }
+.frame{ border-radius:var(--radius); overflow:hidden; position:relative; isolation:isolate;
+  border:1px solid var(--line); }
+.frame__cap{ position:absolute; left:18px; bottom:16px; z-index:2; color:var(--paper);
+  font-size:13px; letter-spacing:.06em; text-shadow:0 1px 14px rgba(0,0,0,.4); }
+.frame::after{ content:""; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(to top, rgba(8,20,19,.5), transparent 55%); }
+.frame__art{ position:absolute; inset:0; z-index:0; transition:transform .9s var(--ease-out); }
+.frame:hover .frame__art{ transform:scale(1.06); }
+.art-a{ background:
+    radial-gradient(120% 90% at 20% 10%, #2b8377, transparent 60%),
+    linear-gradient(160deg, #0f5a54, #0C3A37); }
+.art-b{ background:
+    radial-gradient(120% 120% at 80% 20%, #7ec0b5, transparent 55%),
+    linear-gradient(160deg, #cfe4de, #9dc7bf); }
+.art-c{ background:
+    radial-gradient(100% 100% at 30% 80%, #caa96f, transparent 60%),
+    linear-gradient(160deg, #e7dccb, #d8c6a6); }
+.art-d{ background:
+    radial-gradient(120% 100% at 70% 30%, #1f6e64, transparent 60%),
+    linear-gradient(160deg, #123a37, #0A2E2C); }
+/* soft moving sheen over art */
+.art-sheen::before{ content:""; position:absolute; inset:-30%; opacity:.4;
+  background:conic-gradient(from 0deg, transparent, rgba(255,255,255,.18), transparent 40%);
+  animation:sheen 14s linear infinite; }
+@keyframes sheen{ to{ transform:rotate(360deg); } }
+.f1{ grid-column:span 7; grid-row:span 2; }
+.f2{ grid-column:span 5; grid-row:span 1; }
+.f3{ grid-column:span 5; grid-row:span 1; }
+.f4{ grid-column:span 4; grid-row:span 1; }
+.f5{ grid-column:span 4; grid-row:span 1; }
+.f6{ grid-column:span 4; grid-row:span 1; }
+@media (max-width:820px){
+  .space__grid{ grid-template-columns:repeat(6,1fr); grid-auto-rows:140px; }
+  .f1{ grid-column:span 6; grid-row:span 2; }
+  .f2,.f3{ grid-column:span 3; }
+  .f4,.f5,.f6{ grid-column:span 2; }
+}
+@media (max-width:520px){ .f4,.f5,.f6{ grid-column:span 6; } }
+
+/* ==================================================
+   TESTIMONIALS
+   ================================================== */
+.testi{ background:var(--sand); }
+.testi__grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:22px; }
+.quote{ background:var(--paper-2); border-radius:var(--radius-lg); padding:38px 36px;
+  border:1px solid var(--line); display:flex; flex-direction:column; justify-content:space-between; }
+.quote--lead{ background:var(--deep); color:var(--paper); border-color:transparent; }
+.quote__mark{ font-family:"Fraunces",serif; font-size:64px; line-height:.4; color:var(--brass);
+  height:34px; }
+.quote p{ font-family:"Fraunces",serif; font-weight:300; font-size:clamp(20px,2.3vw,27px);
+  line-height:1.4; letter-spacing:-.01em; margin-top:8px; }
+.quote--lead p{ color:var(--paper); }
+.quote__by{ margin-top:28px; display:flex; align-items:center; gap:13px; }
+.quote__av{ width:44px; height:44px; border-radius:50%; flex:0 0 auto;
+  background:linear-gradient(150deg,var(--teal),var(--aqua)); }
+.quote--lead .quote__av{ background:linear-gradient(150deg,var(--brass),var(--aqua-lt)); }
+.quote__by .nm{ font-family:"Inter",sans-serif; font-size:14.5px; font-weight:500; }
+.quote__by .rl{ font-size:12.5px; color:var(--muted); }
+.quote--lead .quote__by .rl{ color:var(--aqua-lt); }
+.testi__stack{ display:grid; gap:22px; }
+@media (max-width:820px){ .testi__grid{ grid-template-columns:1fr; } }
+
+/* ==================================================
+   JOURNAL
+   ================================================== */
+.journal__head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+  margin-bottom:clamp(32px,4vw,48px); flex-wrap:wrap; }
+.journal__head h2{ font-size:clamp(30px,4.4vw,48px); font-weight:340; }
+.posts{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.post{ display:flex; flex-direction:column; }
+.post__img{ height:220px; border-radius:var(--radius); overflow:hidden; position:relative; }
+.post__img .frame__art{ position:absolute; inset:0; transition:transform .9s var(--ease-out); }
+.post:hover .post__img .frame__art{ transform:scale(1.05); }
+.post__meta{ margin-top:18px; font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--teal); }
+.post h3{ font-size:22px; font-weight:400; margin-top:10px; line-height:1.2; }
+.post p{ color:var(--muted); font-size:14.5px; margin-top:10px; }
+.post a.more{ margin-top:14px; font-size:14px; color:var(--ink); display:inline-flex; gap:8px;
+  align-items:center; border-bottom:1px solid var(--line); padding-bottom:3px; width:fit-content;
+  transition:gap .3s var(--ease-out), border-color .3s; }
+.post a.more:hover{ gap:14px; border-color:var(--brass); }
+@media (max-width:820px){ .posts{ grid-template-columns:1fr; max-width:460px; margin-inline:auto; } }
+
+/* ==================================================
+   BOOK / CTA
+   ================================================== */
+.book{ background:var(--deep); color:var(--paper); position:relative; overflow:hidden; }
+.book__water{ position:absolute; inset:0; z-index:0; opacity:.6; }
+.book__water span{ position:absolute; border-radius:50%; filter:blur(70px); }
+.book__water .b1{ width:44vw; height:44vw; right:-10vw; top:-10vw;
+  background:radial-gradient(circle,var(--teal),transparent 60%); animation:drift2 24s var(--ease) infinite alternate; }
+.book__water .b2{ width:36vw; height:36vw; left:-8vw; bottom:-12vw;
+  background:radial-gradient(circle,#0f5a54,transparent 62%); animation:drift1 28s var(--ease) infinite alternate; }
+.book .wrap{ position:relative; z-index:1; }
+.book__grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,6vw,80px); align-items:center; }
+.book__left .eyebrow{ color:var(--aqua-lt); }
+.book__left h2{ font-size:clamp(34px,5.2vw,60px); font-weight:340; margin-top:22px; }
+.book__left h2 em{ font-style:italic; color:var(--aqua-lt); }
+.book__left p{ margin-top:22px; color:rgba(244,241,234,.82); max-width:44ch; }
+.book__info{ margin-top:34px; display:grid; gap:20px; }
+.book__info .row{ display:flex; gap:14px; align-items:flex-start; }
+.book__info svg{ width:20px; height:20px; color:var(--brass); flex:0 0 auto; margin-top:2px; }
+.book__info .row div span{ display:block; }
+.book__info .k{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--aqua-lt); }
+.book__info .v{ font-size:16px; color:var(--paper); margin-top:3px; }
+
+/* form */
+.bform{ background:var(--paper); color:var(--ink); border-radius:var(--radius-lg);
+  padding:clamp(26px,3vw,38px); box-shadow:0 40px 80px -40px rgba(0,0,0,.6); }
+.bform h3{ font-size:26px; font-weight:400; }
+.bform p.sub{ color:var(--muted); font-size:14.5px; margin-top:8px; }
+.field{ margin-top:18px; }
+.field label{ display:block; font-size:13px; font-weight:500; letter-spacing:.02em;
+  margin-bottom:7px; }
+.field label .req{ color:var(--brass-dk); }
+.field input, .field select, .field textarea{
+  width:100%; font-family:inherit; font-size:15px; color:var(--ink);
+  padding:13px 15px; border:1px solid var(--line); border-radius:12px; background:var(--paper-2);
+  transition:border-color .3s var(--ease), box-shadow .3s var(--ease); min-height:48px; }
+.field textarea{ min-height:96px; resize:vertical; }
+.field input:focus, .field select:focus, .field textarea:focus{
+  outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(31,110,100,.15); }
+.field-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.field .hint{ font-size:12.5px; color:var(--muted); margin-top:6px; }
+.bform .btn{ width:100%; margin-top:22px; }
+.form-note{ font-size:12.5px; color:var(--muted); text-align:center; margin-top:14px; }
+.form-success{ display:none; margin-top:16px; padding:14px 16px; border-radius:12px;
+  background:rgba(31,110,100,.1); border:1px solid rgba(31,110,100,.3); color:var(--teal);
+  font-size:14.5px; display:none; align-items:center; gap:10px; }
+.form-success.is-visible{ display:flex; }
+.form-success svg{ width:20px; height:20px; flex:0 0 auto; }
+@media (max-width:860px){ .book__grid{ grid-template-columns:1fr; } .field-row{ grid-template-columns:1fr; } }
+
+/* ==================================================
+   FOOTER
+   ================================================== */
+.footer{ background:var(--deep-2); color:var(--paper); padding-block:clamp(56px,7vw,84px) 34px; }
+.footer__top{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1.3fr; gap:36px; }
+.footer .brand{ color:var(--paper); }
+.footer .brand small{ color:var(--aqua-lt); }
+.footer__blurb{ color:rgba(244,241,234,.7); font-size:14.5px; margin-top:18px; max-width:32ch; }
+.footer h4{ font-family:"Inter",sans-serif; font-size:12px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--aqua-lt); font-weight:500; margin-bottom:16px; }
+.footer ul{ list-style:none; margin:0; padding:0; display:grid; gap:11px; }
+.footer ul a{ color:rgba(244,241,234,.82); font-size:14.5px; transition:color .3s; }
+.footer ul a:hover{ color:var(--paper); }
+.news{ display:flex; gap:8px; margin-top:14px; }
+.news input{ flex:1; background:rgba(255,255,255,.06); border:1px solid var(--line-lt);
+  border-radius:100px; padding:12px 16px; color:var(--paper); font-size:14px; min-height:46px; }
+.news input::placeholder{ color:rgba(244,241,234,.5); }
+.news input:focus{ outline:none; border-color:var(--aqua); }
+.news button{ background:var(--brass); border:0; border-radius:100px; width:46px; height:46px;
+  cursor:pointer; color:#1a1405; display:grid; place-items:center; flex:0 0 auto;
+  transition:background .3s, transform .3s var(--ease-out); }
+.news button:hover{ background:#cbae7a; transform:translateX(2px); }
+.socials{ display:flex; gap:12px; margin-top:20px; }
+.socials a{ width:40px; height:40px; border-radius:50%; border:1px solid var(--line-lt);
+  display:grid; place-items:center; color:var(--aqua-lt); transition:background .3s, color .3s, transform .3s var(--ease-out); }
+.socials a:hover{ background:var(--paper); color:var(--ink); transform:translateY(-3px); }
+.socials svg{ width:18px; height:18px; }
+.footer__bot{ margin-top:clamp(40px,5vw,60px); padding-top:26px; border-top:1px solid var(--line-lt);
+  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  font-size:13px; color:rgba(244,241,234,.6); }
+.footer__bot a:hover{ color:var(--paper); }
+@media (max-width:820px){ .footer__top{ grid-template-columns:1fr 1fr; }
+  .footer__brandcol{ grid-column:span 2; } }
+@media (max-width:520px){ .footer__top{ grid-template-columns:1fr; } .footer__brandcol{ grid-column:span 1; } }
+
+/* ==================================================
+   SCROLL REVEAL
+   ================================================== */
+.reveal{ opacity:0; transform:translateY(26px); transition:opacity .9s var(--ease-out),
+  transform .9s var(--ease-out); }
+.reveal.in{ opacity:1; transform:none; }
+.reveal[data-delay="1"]{ transition-delay:.08s; }
+.reveal[data-delay="2"]{ transition-delay:.16s; }
+.reveal[data-delay="3"]{ transition-delay:.24s; }
+.reveal[data-delay="4"]{ transition-delay:.32s; }
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation:none !important; transition-duration:.001ms !important; }
+  .reveal{ opacity:1 !important; transform:none !important; }
+  .hero__water span, .book__water span{ animation:none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ANNOUNCEMENT -->
+<div class="topbar">Now booking on the Occoquan River · <strong>Founding memberships open through spring</strong></div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="#" aria-label="Confluence home">
+      <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" stroke="#1F6E64" stroke-width="1.3"/>
+        <path d="M4 18c3 0 3-3 6-3s3 3 6 3 3-3 6-3 3 3 6 3" stroke="#C0A16B" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <path d="M6 12c2.5 0 2.5-2.4 5-2.4s2.5 2.4 5 2.4 2.5-2.4 5-2.4 2.5 2.4 5 2.4" stroke="#1F6E64" stroke-width="1.2" fill="none" stroke-linecap="round" opacity=".7"/>
+      </svg>
+      <span>Confluence<small>Occoquan · VA</small></span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav__links">
+        <li><a href="#waters">The Waters</a></li>
+        <li><a href="#ritual">The Ritual</a></li>
+        <li><a href="#membership">Membership</a></li>
+        <li><a href="#space">The Space</a></li>
+        <li><a href="#journal">Journal</a></li>
+      </ul>
+    </nav>
+    <div class="nav__cta">
+      <a class="btn btn--brass" href="#book">Book a session
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+  <a href="#waters">The Waters</a>
+  <a href="#ritual">The Ritual</a>
+  <a href="#membership">Membership</a>
+  <a href="#space">The Space</a>
+  <a href="#journal">Journal</a>
+  <a class="btn btn--brass" href="#book">Book a session</a>
+</nav>
+<div class="scrim" id="scrim" hidden></div>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__water" aria-hidden="true">
+    <span class="w1"></span><span class="w2"></span><span class="w3"></span>
+  </div>
+  <div class="hero__grain" aria-hidden="true"></div>
+  <div class="wrap hero__inner">
+    <span class="eyebrow hero__eyebrow reveal">A riverside bathing house</span>
+    <h1 class="reveal" data-delay="1">Return to the water<br><em>at the end of the water.</em></h1>
+    <p class="hero__sub reveal" data-delay="2">Confluence is a modern water wellness house on the banks of the Occoquan — float, soak, sauna, and cold plunge, arranged into one quiet, restorative ritual.</p>
+    <div class="hero__actions reveal" data-delay="3">
+      <a class="btn btn--on-dark" href="#book">Reserve your first visit
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn--ghost-dark" href="#waters">Explore the waters</a>
+    </div>
+    <div class="hero__meta reveal" data-delay="4">
+      <div><div class="n" data-count="6">0</div><div class="l">Water experiences</div></div>
+      <div><div class="n" data-count="94" data-suffix="°">0</div><div class="l">Thermal circuit high</div></div>
+      <div><div class="n" data-count="4.9" data-decimals="1">0</div><div class="l">Member rating</div></div>
+      <div><div class="n" data-count="1804" data-raw="1804">0</div><div class="l">On Mill Street, est.</div></div>
+    </div>
+    <div class="hero__waves">
+      <svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,40 C240,90 480,0 720,30 C960,60 1200,90 1440,50 L1440,90 L0,90 Z"></path>
+      </svg>
+    </div>
+  </div>
+  <div class="scrollcue" aria-hidden="true">Scroll</div>
+</section>
+
+<!-- ETHOS -->
+<section class="section ethos">
+  <div class="wrap">
+    <span class="eyebrow center reveal">Our name</span>
+    <h2 class="reveal" data-delay="1" style="margin-top:26px">“Occoquan” comes from the Algonquian for <em>at the end of the water.</em> We built a house where the day ends the same way — warm, weightless, and still.</h2>
+    <div class="place reveal" data-delay="2">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.4 7-11a7 7 0 10-14 0c0 4.6 7 11 7 11z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.5"/></svg>
+      312 Mill Street · Historic Occoquan, Virginia
+    </div>
+  </div>
+</section>
+
+<!-- THE WATERS -->
+<section class="section" id="waters">
+  <div class="wrap">
+    <div class="waters__head">
+      <div>
+        <span class="eyebrow reveal">The Waters</span>
+        <h2 class="reveal" data-delay="1" style="margin-top:20px">Six ways to meet the water — <em>hot, cold, and weightless.</em></h2>
+      </div>
+      <p class="lead reveal" data-delay="2">Every experience is temperature-guided and unhurried. Come for one, or move through them as a circuit.</p>
+    </div>
+
+    <div class="waters__grid">
+      <!-- Float (feature) -->
+      <article class="wcard wcard--dark span-7 reveal">
+        <div>
+          <span class="wcard__tag">Signature</span>
+          <h3>The Float Pools</h3>
+          <p>Skin-temperature water, dense with Epsom salt, in private low-light rooms. Weightless, silent, deeply restorative — our most-requested hour.</p>
+        </div>
+        <div class="wcard__foot">
+          <span class="wcard__temp">93.5°F · 60 min</span>
+          <span class="wcard__ico">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 15c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 2-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M3 19c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="6" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
+          </span>
+        </div>
+      </article>
+
+      <!-- Thermal circuit -->
+      <article class="wcard wcard--mist span-5 reveal" data-delay="1">
+        <div>
+          <span class="wcard__tag">Circuit</span>
+          <h3>Sauna &amp; Steam</h3>
+          <p>Cedar sauna and eucalyptus steam to open the circuit and loosen the week.</p>
+        </div>
+        <div class="wcard__foot">
+          <span class="wcard__temp">185°F · Cedar</span>
+          <span class="wcard__ico">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3c0 2-1.5 2.5-1.5 4S8 9 8 11M12 3c0 2-1.5 2.5-1.5 4S12 9 12 11M16 3c0 2-1.5 2.5-1.5 4S16 9 16 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><rect x="4" y="13" width="16" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>
+          </span>
+        </div>
+      </article>
+
+      <!-- Cold plunge -->
+      <article class="wcard wcard--sand span-4 reveal">
+        <div>
+          <span class="wcard__tag">Contrast</span>
+          <h3>Cold Plunge</h3>
+          <p>A bracing 48°F reset — the sharp inhale that makes the warmth after it unforgettable.</p>
+        </div>
+        <div class="wcard__foot">
+          <span class="wcard__temp">48°F · 2 min</span>
+          <span class="wcard__ico">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20M12 6l3-2M12 6L9 4M12 18l3 2M12 18l-3 2M4 8l16 8M8 6l8 12M4 16L20 8M8 18L16 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+      </article>
+
+      <!-- Mineral soak -->
+      <article class="wcard wcard--mist span-4 reveal" data-delay="1">
+        <div>
+          <span class="wcard__tag">Soak</span>
+          <h3>Mineral Baths</h3>
+          <p>Warm mineral soaking tubs overlooking the river, drawn to a slow, restorative heat.</p>
+        </div>
+        <div class="wcard__foot">
+          <span class="wcard__temp">102°F · River view</span>
+          <span class="wcard__ico">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h16v3a4 4 0 01-4 4H8a4 4 0 01-4-4v-3z" stroke="currentColor" stroke-width="1.5"/><path d="M7 12V7a2 2 0 012-2h1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9 4.5c1 .6 1 1.4 0 2M13 4.5c1 .6 1 1.4 0 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </span>
+        </div>
+      </article>
+
+      <!-- Watsu / bodywork -->
+      <article class="wcard wcard--sand span-4 reveal" data-delay="2">
+        <div>
+          <span class="wcard__tag">Bodywork</span>
+          <h3>Watsu Therapy</h3>
+          <p>Guided aquatic bodywork in warm water — stretching and stillness, held afloat.</p>
+        </div>
+        <div class="wcard__foot">
+          <span class="wcard__temp">96°F · Guided</span>
+          <span class="wcard__ico">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="5" r="2.2" stroke="currentColor" stroke-width="1.5"/><path d="M5 16c2-1 4-1 7 1s5 2 7 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M8 10l4 2 4-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- THE RITUAL -->
+<section class="section ritual" id="ritual">
+  <div class="wrap">
+    <div class="ritual__head">
+      <span class="eyebrow reveal">The Ritual</span>
+      <h2 class="reveal" data-delay="1">A sequence, not a menu. <em>Move through the water in order.</em></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <span class="step__dot"></span>
+        <div class="step__n">01</div>
+        <h3>Arrive</h3>
+        <p>Leave your phone at the door. Robe, tea, and a slow start by the window.</p>
+        <div class="step__min">10 min</div>
+      </div>
+      <div class="step reveal" data-delay="1">
+        <span class="step__dot"></span>
+        <div class="step__n">02</div>
+        <h3>Warm</h3>
+        <p>Cedar sauna and steam open the body and quiet the mind.</p>
+        <div class="step__min">15 min</div>
+      </div>
+      <div class="step reveal" data-delay="2">
+        <span class="step__dot"></span>
+        <div class="step__n">03</div>
+        <h3>Plunge</h3>
+        <p>The cold reset — brief, deliberate, and clarifying.</p>
+        <div class="step__min">2 min</div>
+      </div>
+      <div class="step reveal" data-delay="3">
+        <span class="step__dot"></span>
+        <div class="step__n">04</div>
+        <h3>Float</h3>
+        <p>Weightless in skin-warm salt water. The centre of the whole visit.</p>
+        <div class="step__min">45 min</div>
+      </div>
+      <div class="step reveal" data-delay="4">
+        <span class="step__dot"></span>
+        <div class="step__n">05</div>
+        <h3>Rest</h3>
+        <p>Wrapped and warm in the river room until you're ready for the world.</p>
+        <div class="step__min">Unhurried</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section class="section" id="membership">
+  <div class="wrap">
+    <div class="plans__head">
+      <span class="eyebrow center reveal">Membership</span>
+      <h2 class="reveal" data-delay="1">Make the water a <em>habit.</em></h2>
+      <p class="lead reveal" data-delay="2" style="margin-inline:auto">Come once, or fold it into your week. Members save on every visit and bring a guest each month.</p>
+    </div>
+    <div class="plans">
+      <article class="plan reveal">
+        <div class="plan__name">Day Pass</div>
+        <div class="plan__desc">A single, unhurried visit through the full circuit.</div>
+        <div class="plan__price"><span class="amt">$68</span><span class="per">/ visit</span></div>
+        <ul class="plan__list">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Full thermal circuit access</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Robe, towel &amp; tea service</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> 2-hour stay</li>
+        </ul>
+        <a class="btn btn--ghost" href="#book">Book a day pass</a>
+      </article>
+
+      <article class="plan plan--feature reveal" data-delay="1">
+        <span class="plan__badge">Most chosen</span>
+        <div class="plan__name">The Tide</div>
+        <div class="plan__desc">Monthly membership for a weekly water habit.</div>
+        <div class="plan__price"><span class="amt">$189</span><span class="per">/ month</span></div>
+        <ul class="plan__list">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> 4 circuit visits every month</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> One float session included</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Bring a guest each month</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> 15% off treatments &amp; retail</li>
+        </ul>
+        <a class="btn btn--brass" href="#book">Become a member
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="plan reveal" data-delay="2">
+        <div class="plan__name">Founding</div>
+        <div class="plan__desc">Unlimited water for our first hundred members.</div>
+        <div class="plan__price"><span class="amt">$310</span><span class="per">/ month</span></div>
+        <ul class="plan__list">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Unlimited circuit &amp; float</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Priority weekend booking</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Two monthly guests</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Founding rate locked for life</li>
+        </ul>
+        <a class="btn btn--ghost" href="#book">Join the founders</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- THE SPACE -->
+<section class="section" id="space">
+  <div class="wrap">
+    <div class="waters__head">
+      <div>
+        <span class="eyebrow reveal">The Space</span>
+        <h2 class="reveal" data-delay="1" style="margin-top:20px">A restored mill on the river's edge.</h2>
+      </div>
+      <p class="lead reveal" data-delay="2">Stone, cedar, and low light — designed so the loudest thing in the room is the water.</p>
+    </div>
+    <div class="space__grid">
+      <div class="frame f1 reveal"><div class="frame__art art-a art-sheen"></div><span class="frame__cap">The float rooms</span></div>
+      <div class="frame f2 reveal" data-delay="1"><div class="frame__art art-b"></div><span class="frame__cap">Mineral soak, river-facing</span></div>
+      <div class="frame f3 reveal" data-delay="2"><div class="frame__art art-c"></div><span class="frame__cap">Cedar sauna</span></div>
+      <div class="frame f4 reveal"><div class="frame__art art-d art-sheen"></div><span class="frame__cap">Cold plunge</span></div>
+      <div class="frame f5 reveal" data-delay="1"><div class="frame__art art-b"></div><span class="frame__cap">The rest room</span></div>
+      <div class="frame f6 reveal" data-delay="2"><div class="frame__art art-c"></div><span class="frame__cap">Tea &amp; quiet</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testi">
+  <div class="wrap">
+    <span class="eyebrow reveal" style="margin-bottom:36px;display:inline-flex">In members' words</span>
+    <div class="testi__grid" style="margin-top:20px">
+      <div class="quote quote--lead reveal">
+        <div>
+          <div class="quote__mark" aria-hidden="true">”</div>
+          <p>I came for the float and stayed for the quiet. An hour at Confluence undoes a week — it's the only place in town that asks nothing of you.</p>
+        </div>
+        <div class="quote__by">
+          <span class="quote__av" aria-hidden="true"></span>
+          <span><span class="nm">Mara Whitfield</span><span class="rl">Founding member · Lorton, VA</span></span>
+        </div>
+      </div>
+      <div class="testi__stack">
+        <div class="quote reveal" data-delay="1">
+          <div><div class="quote__mark" aria-hidden="true">”</div>
+          <p>The contrast circuit is now my Sunday. I sleep better the whole week after.</p></div>
+          <div class="quote__by">
+            <span class="quote__av" aria-hidden="true"></span>
+            <span><span class="nm">Devin Okafor</span><span class="rl">The Tide member</span></span>
+          </div>
+        </div>
+        <div class="quote reveal" data-delay="2">
+          <div><div class="quote__mark" aria-hidden="true">”</div>
+          <p>Beautiful, unhurried, and right on the water. It feels like a small trip, ten minutes from home.</p></div>
+          <div class="quote__by">
+            <span class="quote__av" aria-hidden="true"></span>
+            <span><span class="nm">Priya Anand</span><span class="rl">Day-pass regular</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNAL -->
+<section class="section" id="journal">
+  <div class="wrap">
+    <div class="journal__head">
+      <div>
+        <span class="eyebrow reveal">The Journal</span>
+        <h2 class="reveal" data-delay="1" style="margin-top:16px">Notes on water &amp; rest</h2>
+      </div>
+      <a class="btn btn--ghost reveal" data-delay="2" href="#">All writing</a>
+    </div>
+    <div class="posts">
+      <article class="post reveal">
+        <div class="post__img"><div class="frame__art art-a"></div></div>
+        <div class="post__meta">Ritual · 4 min read</div>
+        <h3>Why the cold plunge works better after heat</h3>
+        <p>The science of contrast therapy, and how to move through it without the shock.</p>
+        <a class="more" href="#">Read <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      <article class="post reveal" data-delay="1">
+        <div class="post__img"><div class="frame__art art-c"></div></div>
+        <div class="post__meta">Float · 6 min read</div>
+        <h3>An hour of nothing: what floating actually does</h3>
+        <p>On sensory quiet, magnesium, and the strange arithmetic of doing less.</p>
+        <a class="more" href="#">Read <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      <article class="post reveal" data-delay="2">
+        <div class="post__img"><div class="frame__art art-d"></div></div>
+        <div class="post__meta">Place · 3 min read</div>
+        <h3>The Occoquan, and why we built here</h3>
+        <p>A short history of a mill town at the end of the water — and our small part in it.</p>
+        <a class="more" href="#">Read <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK / CTA -->
+<section class="section book" id="book">
+  <div class="book__water" aria-hidden="true"><span class="b1"></span><span class="b2"></span></div>
+  <div class="wrap">
+    <div class="book__grid">
+      <div class="book__left">
+        <span class="eyebrow reveal">Reserve</span>
+        <h2 class="reveal" data-delay="1">Come down to <em>the water.</em></h2>
+        <p class="reveal" data-delay="2">Tell us when you'd like to visit and which waters you're drawn to. We'll confirm within the day — first visits include a short orientation.</p>
+        <div class="book__info reveal" data-delay="3">
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.4 7-11a7 7 0 10-14 0c0 4.6 7 11 7 11z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.5"/></svg>
+            <div><span class="k">Find us</span><span class="v">312 Mill Street, Occoquan, VA 22125</span></div>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><span class="k">Hours</span><span class="v">Wed–Sun · 8am – 9pm · By reservation</span></div>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6l8 6 8-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="5" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/></svg>
+            <div><span class="k">Say hello</span><span class="v">hello@confluence-occoquan.com · (703) 555-0147</span></div>
+          </div>
+        </div>
+      </div>
+
+      <form class="bform reveal" data-delay="1" id="bookForm" novalidate>
+        <h3>Request a visit</h3>
+        <p class="sub">We hold a limited number of sessions each day to keep the house quiet.</p>
+        <div class="field">
+          <label for="name">Full name <span class="req" aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" required placeholder="Your name" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@email.com" />
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(703) 555-0100" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="experience">Water</label>
+            <select id="experience" name="experience">
+              <option>Full thermal circuit</option>
+              <option>Float session</option>
+              <option>Mineral soak</option>
+              <option>Watsu therapy</option>
+              <option>Not sure yet — help me choose</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="date">Preferred date</label>
+            <input id="date" name="date" type="date" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="notes">Anything we should know?</label>
+          <textarea id="notes" name="notes" placeholder="First visit, mobility needs, celebrating something…"></textarea>
+          <div class="hint">First visits include a short orientation — arrive 15 minutes early.</div>
+        </div>
+        <button class="btn btn--brass" type="submit">Request my session
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Thank you — we'll confirm your visit by email within the day.</span>
+        </div>
+        <p class="form-note">By requesting, you agree to our booking &amp; cancellation policy. No payment is taken now.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brandcol">
+        <a class="brand" href="#" aria-label="Confluence home">
+          <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="15" stroke="#6FB3A8" stroke-width="1.3"/>
+            <path d="M4 18c3 0 3-3 6-3s3 3 6 3 3-3 6-3 3 3 6 3" stroke="#C0A16B" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span>Confluence<small>Occoquan · VA</small></span>
+        </a>
+        <p class="footer__blurb">A water wellness house at the end of the water. Float, soak, sauna, plunge — restore by the Occoquan River.</p>
+        <div class="socials">
+          <a href="#" aria-label="Confluence on Instagram"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="7" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Confluence on Facebook"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 8h2V5h-2c-1.7 0-3 1.3-3 3v2H9v3h2v6h3v-6h2l1-3h-3V8.5c0-.3.2-.5.5-.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></a>
+          <a href="#" aria-label="Confluence newsletter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l7 5 7-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="#waters">The Waters</a></li>
+          <li><a href="#ritual">The Ritual</a></li>
+          <li><a href="#membership">Membership</a></li>
+          <li><a href="#book">Book a session</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>House</h4>
+        <ul>
+          <li><a href="#space">The Space</a></li>
+          <li><a href="#journal">Journal</a></li>
+          <li><a href="#">Gift cards</a></li>
+          <li><a href="#">Private hire</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>The tide letter</h4>
+        <p class="footer__blurb" style="margin-top:0">Seasonal rituals and quiet news from the river. Once a month.</p>
+        <form class="news" onsubmit="return false" aria-label="Newsletter signup">
+          <label for="news" class="skip">Email address</label>
+          <input id="news" type="email" placeholder="Email address" autocomplete="email" />
+          <button type="submit" aria-label="Subscribe">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="footer__bot">
+      <span>© 2026 Confluence Water Wellness · Occoquan, Virginia</span>
+      <span style="display:flex;gap:22px;flex-wrap:wrap">
+        <a href="#">Privacy</a><a href="#">Booking policy</a><a href="#">Accessibility</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- Condensing nav ---- */
+  var nav = document.getElementById("nav");
+  var onScroll = function(){
+    if(window.scrollY > 24){ nav.classList.add("is-condensed"); }
+    else{ nav.classList.remove("is-condensed"); }
+  };
+  window.addEventListener("scroll", onScroll, { passive:true });
+  onScroll();
+
+  /* ---- Mobile menu ---- */
+  var toggle = document.getElementById("navToggle");
+  var menu = document.getElementById("mobileMenu");
+  var scrim = document.getElementById("scrim");
+  function setMenu(open){
+    nav.classList.toggle("is-open", open);
+    menu.classList.toggle("is-open", open);
+    scrim.classList.toggle("is-open", open);
+    scrim.hidden = !open;
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+  toggle.addEventListener("click", function(){ setMenu(!menu.classList.contains("is-open")); });
+  scrim.addEventListener("click", function(){ setMenu(false); });
+  menu.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", function(){ setMenu(false); }); });
+  window.addEventListener("keydown", function(e){ if(e.key === "Escape") setMenu(false); });
+
+  /* ---- Scroll reveal ---- */
+  var reveals = document.querySelectorAll(".reveal");
+  if(reduced || !("IntersectionObserver" in window)){
+    reveals.forEach(function(el){ el.classList.add("in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { threshold:0.14, rootMargin:"0px 0px -8% 0px" });
+    reveals.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---- Count-up stats ---- */
+  function animateCount(el){
+    var target = parseFloat(el.getAttribute("data-count"));
+    var decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
+    var suffix = el.getAttribute("data-suffix") || "";
+    var raw = el.getAttribute("data-raw"); // for literal numbers like a year
+    if(reduced){
+      el.textContent = raw ? raw : target.toFixed(decimals) + suffix;
+      return;
+    }
+    var start = performance.now(), dur = 1400;
+    function frame(now){
+      var p = Math.min((now - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      var val = target * eased;
+      el.textContent = (raw ? Math.round(val) : val.toFixed(decimals)) + (p===1 ? suffix : (decimals? "":""));
+      if(p < 1){ requestAnimationFrame(frame); }
+      else { el.textContent = (raw ? raw : target.toFixed(decimals)) + suffix; }
+    }
+    requestAnimationFrame(frame);
+  }
+  var counters = document.querySelectorAll("[data-count]");
+  if("IntersectionObserver" in window){
+    var cio = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ animateCount(en.target); cio.unobserve(en.target); }
+      });
+    }, { threshold:0.6 });
+    counters.forEach(function(el){ cio.observe(el); });
+  } else {
+    counters.forEach(animateCount);
+  }
+
+  /* ---- Booking form (client-side demo) ---- */
+  var form = document.getElementById("bookForm");
+  var success = document.getElementById("formSuccess");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = form.querySelector("#name");
+    var email = form.querySelector("#email");
+    var ok = true;
+    [name, email].forEach(function(f){
+      if(!f.value.trim() || (f.type==="email" && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.value))){
+        f.style.borderColor = "#C0522C"; ok = false;
+        f.setAttribute("aria-invalid","true");
+      } else { f.style.borderColor = ""; f.removeAttribute("aria-invalid"); }
+    });
+    if(!ok){ (name.value.trim() ? email : name).focus(); return; }
+    success.classList.add("is-visible");
+    form.querySelector("button[type=submit]").style.display = "none";
+    success.scrollIntoView({ behavior: reduced ? "auto":"smooth", block:"center" });
+    form.reset();
+  });
+})();
+</script>
+</body>
+</html>
