@@ -450,6 +450,32 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
 .biz__feat .d{ color:rgba(247,245,239,.85); font-size:14px; margin-top:2px; }
 @media (max-width:860px){ .biz__grid{ grid-template-columns:1fr; } }
 
+/* business model: high-ticket + integrity */
+.biz__model{ margin-top:clamp(44px,6vw,72px); }
+.biz__banner{ background:var(--deep); color:var(--paper); border-radius:var(--radius-lg);
+  padding:clamp(30px,4vw,48px); position:relative; overflow:hidden; }
+.biz__banner::before{ content:""; position:absolute; inset:0; z-index:0; opacity:.55;
+  background:radial-gradient(90% 100% at 100% 0%, rgba(192,161,107,.32), transparent 58%),
+             radial-gradient(80% 90% at 0% 100%, rgba(63,182,188,.34), transparent 60%); }
+.biz__banner > *{ position:relative; z-index:1; }
+.biz__banner .eyebrow{ color:var(--aqua-lt); }
+.biz__banner h3{ font-size:clamp(26px,3.6vw,42px); font-weight:340; margin-top:14px; max-width:20ch; }
+.biz__banner h3 em{ font-style:italic; color:var(--aqua-lt); }
+.biz__banner p{ color:rgba(247,245,239,.86); margin-top:16px; max-width:62ch; }
+.biz__pillars{ margin-top:16px; display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.pillar{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius); padding:24px 22px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65), 0 2px 3px rgba(11,58,64,.04), 0 16px 34px -28px rgba(11,58,64,.18);
+  transition:transform .5s var(--ease-out), box-shadow .5s var(--ease-out); }
+.pillar:hover{ transform:translateY(-5px); box-shadow:inset 0 1px 0 rgba(255,255,255,.65), 0 2px 3px rgba(11,58,64,.05), 0 28px 56px -30px rgba(11,58,64,.3); }
+.pillar__ico{ width:44px; height:44px; border-radius:12px; display:grid; place-items:center;
+  background:var(--sand); color:var(--teal); margin-bottom:15px; }
+.pillar__ico svg{ width:22px; height:22px; }
+.pillar h4{ font-size:18px; font-weight:400; }
+.pillar p{ color:var(--muted); font-size:13.5px; margin-top:9px; }
+.biz__disclaimer{ margin-top:22px; font-size:12px; color:var(--muted); line-height:1.55; max-width:82ch; }
+@media (max-width:900px){ .biz__pillars{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:480px){ .biz__pillars{ grid-template-columns:1fr; } }
+
 /* reviews */
 .reviews{ background:var(--deep-2); color:var(--paper); }
 .reviews__head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap;
@@ -1076,8 +1102,8 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
     <div class="biz__grid">
       <div class="biz__copy">
         <span class="eyebrow reveal">Build a business</span>
-        <h2 class="reveal" data-delay="1">Love the water? <em>You can share it — and get paid to.</em></h2>
-        <p class="reveal" data-delay="2">Every bottle you'd have bought is a conversation you could own. As an Enagic® distributor you sell a product people can taste before they buy — and we hand you the toolkit to actually run it like a business.</p>
+        <h2 class="reveal" data-delay="1">Love the water? <em>You can build a real business on it.</em></h2>
+        <p class="reveal" data-delay="2">Enagic® is a high-ticket, direct-sales model built on a product people taste before they buy — and a compensation plan that's published, fixed, and the same for everyone. As a distributor you sell something you'd recommend anyway; we hand you the mentorship and the toolkit to run it with integrity.</p>
         <ul class="biz__list reveal" data-delay="3">
           <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Start with a product you already believe in</li>
           <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Mentorship from Virginia's first showroom</li>
@@ -1099,6 +1125,39 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
           <div class="row"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div><div class="k">Know what's working</div><div class="d">See which conversations convert so you spend time on the right ones.</div></div></div>
         </div>
       </div>
+    </div>
+
+    <div class="biz__model">
+      <div class="biz__banner reveal">
+        <span class="eyebrow">The model</span>
+        <h3>The power of <em>high-ticket</em>, done with integrity.</h3>
+        <p>Low-ticket selling is a volume grind — move a mountain of cheap product, hope it adds up. A Kangen® machine is a premium purchase people keep for years, so each honest sale carries real weight and you're never pressuring anyone. Fewer, better conversations. The demo does the convincing.</p>
+      </div>
+
+      <div class="biz__pillars">
+        <div class="pillar reveal">
+          <div class="pillar__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 13V6a2 2 0 012-2h7l7 7-9 9-8-8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="9" cy="9" r="1.4" fill="currentColor"/></svg></div>
+          <h4>High-ticket product</h4>
+          <p>A premium machine people keep for years — not a cabinet of consumables you have to keep reselling.</p>
+        </div>
+        <div class="pillar reveal" data-delay="1">
+          <div class="pillar__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M5 7h14M7 7l-3 6a3 3 0 006 0L7 7zm10 0l-3 6a3 3 0 006 0l-3-6z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h4>One published plan</h4>
+          <p>Enagic's fixed 8-point commission plan is the same for a first-day distributor and a ten-year veteran. No secret tiers.</p>
+        </div>
+        <div class="pillar reveal" data-delay="2">
+          <div class="pillar__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h4>No quotas or auto-ship</h4>
+          <p>Nothing to stock, no monthly minimums, no forced buys — and commissions paid weekly, directly by Enagic.</p>
+        </div>
+        <div class="pillar reveal" data-delay="3">
+          <div class="pillar__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20s-7-4.5-7-9.5A3.5 3.5 0 0112 7a3.5 3.5 0 017 3c0 5-7 10-7 10z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <h4>Integrity first</h4>
+          <p>Lead with the water, never hype. If it's not right for someone, an honest "not for you" is always fine.</p>
+        </div>
+      </div>
+
+      <p class="biz__disclaimer reveal">Becoming a distributor is a business opportunity, not a guarantee of income — earnings depend on your own effort and results vary from person to person. Enagic® and Kangen Water® are registered trademarks of Enagic Co., Ltd.; Crave Kangen is an independent Enagic distributor.</p>
     </div>
   </div>
 </section>
