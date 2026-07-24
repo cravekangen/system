@@ -10,7 +10,18 @@ import { Button } from "@/components/ui/button";
 function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
-    () => ["hydrogen-rich", "alkaline", "ionized", "fresh", "alive"],
+    () => [
+      // water qualities
+      "hydrogen-rich",
+      "alkaline",
+      "ionized",
+      "fresh",
+      "alive",
+      // distilled from Crave Kangen's Google reviews
+      "life-changing",
+      "restorative",
+      "loved",
+    ],
     []
   );
 
