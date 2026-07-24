@@ -8,3 +8,9 @@ package-lock.json
 
 # OS noise
 .DS_Store
+
+# Vite build output
+dist/
+*.tsbuildinfo
+sites/crave-kangen-app/vite.config.js
+sites/crave-kangen-app/vite.config.d.ts

@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* shadcn design tokens, themed for Crave Kangen (deep water teal + aqua). */
+@layer base {
+  :root {
+    --background: 45 33% 95%;        /* limestone mist */
+    --foreground: 185 41% 9%;        /* near-black teal */
+
+    --card: 44 40% 98%;
+    --card-foreground: 185 41% 9%;
+
+    --popover: 44 40% 98%;
+    --popover-foreground: 185 41% 9%;
+
+    --primary: 177 65% 27%;          /* teal #17726E */
+    --primary-foreground: 45 33% 95%;
+
+    --secondary: 40 34% 85%;         /* sand */
+    --secondary-foreground: 185 41% 12%;
+
+    --muted: 45 20% 90%;
+    --muted-foreground: 175 10% 36%;
+
+    --accent: 184 50% 49%;           /* hydrogen aqua #3FB6BC */
+    --accent-foreground: 185 60% 10%;
+
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 45 33% 95%;
+
+    --border: 185 20% 84%;
+    --input: 185 20% 84%;
+    --ring: 184 50% 49%;             /* aqua focus ring */
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 187 65% 9%;
+    --foreground: 45 33% 95%;
+
+    --card: 187 60% 11%;
+    --card-foreground: 45 33% 95%;
+
+    --popover: 187 60% 11%;
+    --popover-foreground: 45 33% 95%;
+
+    --primary: 184 50% 49%;
+    --primary-foreground: 187 65% 9%;
+
+    --secondary: 186 30% 18%;
+    --secondary-foreground: 45 33% 95%;
+
+    --muted: 186 25% 16%;
+    --muted-foreground: 184 25% 72%;
+
+    --accent: 177 55% 30%;
+    --accent-foreground: 45 33% 95%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 45 33% 95%;
+
+    --border: 186 25% 20%;
+    --input: 186 25% 20%;
+    --ring: 184 50% 49%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
