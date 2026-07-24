@@ -364,14 +364,57 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
 .systems__head{ text-align:center; max-width:680px; margin-inline:auto; margin-bottom:clamp(36px,4vw,52px); }
 .systems__head h2{ font-size:clamp(30px,5vw,54px); font-weight:340; margin-top:18px; }
 .systems__head h2 em{ font-style:italic; color:var(--teal); }
-.systems__row{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:36px; }
-.sys{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius); padding:24px 22px; position:relative; overflow:hidden;
+.systems__row{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-bottom:36px; }
+.sys{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius); padding:22px 20px; position:relative; overflow:hidden;
   transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.65), 0 2px 3px rgba(11,58,64,.04), 0 16px 34px -28px rgba(11,58,64,.18); }
 .sys:hover{ transform:translateY(-5px); box-shadow:inset 0 1px 0 rgba(255,255,255,.65), 0 2px 3px rgba(11,58,64,.05), 0 28px 56px -30px rgba(11,58,64,.3); }
-.sys .k{ font-family:"Fraunces",serif; font-size:22px; }
-.sys .t{ font-size:13px; color:var(--teal); letter-spacing:.04em; margin-top:2px; }
-.sys p{ font-size:13.5px; color:var(--muted); margin-top:12px; }
+.sys .k{ font-family:"Fraunces",serif; font-size:21px; }
+.sys .t{ font-size:12.5px; color:var(--teal); letter-spacing:.04em; margin-top:2px; }
+.sys p{ font-size:13px; color:var(--muted); margin-top:12px; }
+.sys--partner{ box-shadow:inset 0 2px 0 var(--brass), 0 2px 3px rgba(11,58,64,.04), 0 16px 34px -28px rgba(11,58,64,.18); }
+.sys--partner .t{ color:var(--brass-dk); }
+
+/* bundles — a scannable decision ladder */
+.bundles{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:40px; align-items:stretch; }
+.bundle{ background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius-lg); padding:24px 22px;
+  display:flex; flex-direction:column; position:relative; overflow:hidden;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65), 0 2px 3px rgba(11,58,64,.04), 0 16px 36px -28px rgba(11,58,64,.2);
+  transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out); }
+.bundle:hover{ transform:translateY(-6px); box-shadow:inset 0 1px 0 rgba(255,255,255,.65), 0 2px 3px rgba(11,58,64,.05), 0 32px 62px -32px rgba(11,58,64,.32); }
+.bundle__meter{ display:flex; gap:4px; margin-bottom:16px; }
+.bundle__meter i{ height:4px; flex:1; border-radius:2px; background:var(--line); transition:background .4s var(--ease); }
+.bundle__meter i.on{ background:var(--teal); }
+.bundle__tier{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--teal); }
+.bundle h3{ font-size:20px; font-weight:400; margin-top:6px; }
+.bundle__for{ color:var(--muted); font-size:13.5px; margin-top:8px; line-height:1.5; }
+.bundle__items{ list-style:none; margin:16px 0 0; padding:0; display:flex; flex-direction:column; gap:8px; }
+.bundle__items li{ display:flex; gap:9px; align-items:flex-start; font-size:13.5px; color:var(--ink); }
+.bundle__items svg{ width:15px; height:15px; color:var(--teal); flex:0 0 auto; margin-top:3px; }
+.bundle__cta{ margin-top:auto; padding-top:20px; font-size:13.5px; color:var(--ink); display:inline-flex;
+  align-items:center; gap:7px; width:fit-content; transition:gap .3s var(--ease-out); }
+.bundle__cta span{ border-bottom:1px solid var(--line); padding-bottom:3px; transition:border-color .3s; }
+.bundle__cta:hover{ gap:11px; } .bundle__cta:hover span{ border-color:var(--brass); }
+.bundle__cta svg{ width:15px; height:15px; }
+.bundle--feature{ background:var(--deep); color:var(--paper); border-color:transparent; }
+.bundle--feature::before{ content:""; position:absolute; inset:0; z-index:0; opacity:.5;
+  background:radial-gradient(100% 90% at 90% 0%, rgba(63,182,188,.4), transparent 60%); }
+.bundle--feature > *{ position:relative; z-index:1; }
+.bundle--feature .bundle__tier{ color:var(--aqua-lt); }
+.bundle--feature .bundle__for{ color:rgba(247,245,239,.82); }
+.bundle--feature .bundle__items li{ color:var(--paper); }
+.bundle--feature .bundle__items svg{ color:var(--aqua); }
+.bundle--feature .bundle__meter i{ background:rgba(255,255,255,.18); }
+.bundle--feature .bundle__meter i.on{ background:var(--aqua); }
+.bundle--feature .bundle__cta{ color:var(--paper); } .bundle--feature .bundle__cta span{ border-color:var(--line-lt); }
+.bundle__badge{ position:absolute; top:16px; right:16px; z-index:2; font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:#05282a; background:var(--aqua); padding:4px 9px; border-radius:100px; }
+.systems__sub{ display:flex; align-items:center; gap:16px; justify-content:center; margin:6px 0 26px;
+  font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+.systems__sub::before, .systems__sub::after{ content:""; height:1px; flex:1; max-width:130px; background:var(--line); }
+@media (max-width:1080px){ .systems__row, .bundles{ grid-template-columns:repeat(3,1fr); } }
+@media (max-width:720px){ .systems__row, .bundles{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:480px){ .systems__row, .bundles{ grid-template-columns:1fr; } }
 .systems__cta{ background:var(--deep); color:var(--paper); border-radius:var(--radius-lg);
   padding:clamp(30px,4vw,48px); display:flex; align-items:center; justify-content:space-between; gap:30px;
   flex-wrap:wrap; position:relative; overflow:hidden; }
@@ -381,8 +424,6 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
 .systems__cta h3{ font-size:clamp(24px,3vw,34px); font-weight:340; max-width:18ch; }
 .systems__cta h3 em{ font-style:italic; color:var(--aqua-lt); }
 .systems__cta p{ color:rgba(247,245,239,.9); font-size:14.5px; margin-top:10px; max-width:40ch; }
-@media (max-width:900px){ .systems__row{ grid-template-columns:repeat(2,1fr); } }
-@media (max-width:520px){ .systems__row{ grid-template-columns:1fr; } }
 
 /* business / marketing software */
 .biz__grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,5vw,72px); align-items:center; }
@@ -794,20 +835,91 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
 <section class="section systems" id="systems">
   <div class="wrap">
     <div class="systems__head">
-      <span class="eyebrow center reveal">The Systems</span>
-      <h2 class="reveal" data-delay="1">The machines behind the counter — <em>see them, then take one home.</em></h2>
+      <span class="eyebrow center reveal">Choose your setup</span>
+      <h2 class="reveal" data-delay="1">Five ways in — <em>from a single filter to the whole home.</em></h2>
+      <p class="lead reveal" data-delay="2" style="margin:18px auto 0">Filtration and ionization do different jobs: Aquaperform® takes contaminants out, Kangen® adds hydrogen back. Pick a bundle below, or choose an individual system — not sure, and we'll build the right one with you.</p>
     </div>
+
+    <div class="bundles">
+      <article class="bundle bundle--feature reveal">
+        <span class="bundle__badge">Signature</span>
+        <div class="bundle__meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <div class="bundle__tier">The Whole Home</div>
+        <h3>Every tap covered</h3>
+        <p class="bundle__for">Drinking, cooking, and the shower — the complete Crave setup.</p>
+        <ul class="bundle__items">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>LeveLuk K8 ionizer</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Aquaperform® filtration</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Anespa® DX shower</li>
+        </ul>
+        <a class="bundle__cta" href="#reserve"><span>Build my whole home</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+
+      <article class="bundle reveal" data-delay="1">
+        <div class="bundle__meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+        <div class="bundle__tier">The Kitchen Pro</div>
+        <h3>Filter, then ionize</h3>
+        <p class="bundle__for">Our best countertop pairing for the serious kitchen.</p>
+        <ul class="bundle__items">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>LeveLuk K8 ionizer</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Aquaperform® prefilter</li>
+        </ul>
+        <a class="bundle__cta" href="#reserve"><span>Ask about this setup</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+
+      <article class="bundle reveal" data-delay="2">
+        <div class="bundle__meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+        <div class="bundle__tier">The Classic</div>
+        <h3>Proven, at the source</h3>
+        <p class="bundle__for">The category-defining ionizer, cleaner from the start.</p>
+        <ul class="bundle__items">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>LeveLuk SD501 ionizer</li>
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Aquaperform® prefilter</li>
+        </ul>
+        <a class="bundle__cta" href="#reserve"><span>Ask about this setup</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+
+      <article class="bundle reveal" data-delay="3">
+        <div class="bundle__meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+        <div class="bundle__tier">The Starter</div>
+        <h3>Begin with Kangen</h3>
+        <p class="bundle__for">Hydrogen-rich water at your sink — the first step in.</p>
+        <ul class="bundle__items">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>A Kangen Water® machine</li>
+        </ul>
+        <a class="bundle__cta" href="#reserve"><span>Ask about this setup</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+
+      <article class="bundle reveal" data-delay="4">
+        <div class="bundle__meter" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        <div class="bundle__tier">Clean Start</div>
+        <h3>Filtration first</h3>
+        <p class="bundle__for">Premium contaminant reduction — the simplest way to begin.</p>
+        <ul class="bundle__items">
+          <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Aquaperform® by Multipure</li>
+        </ul>
+        <a class="bundle__cta" href="#reserve"><span>Ask about this setup</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+    </div>
+
+    <div class="systems__sub reveal">Or choose an individual system</div>
     <div class="systems__row">
-      <div class="sys reveal"><div class="k">K8</div><div class="t">The flagship</div><p>Eight plates, maximum performance — our most-recommended countertop system.</p></div>
+      <div class="sys reveal"><div class="k">K8</div><div class="t">The flagship</div><p>Eight plates, maximum performance — our most-recommended ionizer.</p></div>
       <div class="sys reveal" data-delay="1"><div class="k">SD501</div><div class="t">The classic</div><p>The system that built the category — dependable, powerful, proven.</p></div>
       <div class="sys reveal" data-delay="2"><div class="k">JR IV</div><div class="t">The starter</div><p>A compact, approachable entry into Kangen Water® for smaller kitchens.</p></div>
       <div class="sys reveal" data-delay="3"><div class="k">Anespa®</div><div class="t">The shower</div><p>Dechlorinated, mineral-rich water for your whole shower and bath.</p></div>
+      <div class="sys sys--partner reveal" data-delay="4"><div class="k">Aquaperform®</div><div class="t">The filter · Multipure</div><p>NSF 42/53/401 carbon-block filtration — reduces arsenic, lead &amp; pharmaceuticals.</p></div>
     </div>
     <p class="menu__note reveal" style="text-align:left;margin:-8px 0 32px">Also on the shelf, made with Kangen Water®: <strong style="color:var(--ink)">Kangen Ukon Tea</strong>, <strong style="color:var(--ink)">Ukon &amp; Honey Soap</strong>, and <strong style="color:var(--ink)">Turmeric Ukon DD</strong> — ask us in store.</p>
     <div class="systems__cta reveal">
       <div>
-        <h3>Already know your model? <em>Check out securely on the official Enagic® store.</em></h3>
-        <p>This button goes straight to checkout on the official store — best for buyers who are ready. Not sure which system yet? Come to a free class or book a one-on-one demo first, and we'll help you choose.</p>
+        <h3>Already know your Kangen® model? <em>Check out securely on the official store.</em></h3>
+        <p>This button goes straight to checkout for Enagic® machines. Bundles and the Aquaperform® filter are arranged with us directly — just ask, or book a demo and we'll build your setup.</p>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;align-items:stretch">
         <a class="btn btn--aqua" href="http://cravekangen.enagicweb.info/" target="_blank" rel="noopener">Buy your machine
@@ -961,6 +1073,7 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
             <option>A free water class (Sat 2pm / Tue &amp; Fri 7pm)</option>
             <option>A private class for my group</option>
             <option>A one-on-one machine demo</option>
+            <option>A complete setup / bundle</option>
             <option>Becoming an Enagic distributor</option>
             <option>The marketing software</option>
           </select>
