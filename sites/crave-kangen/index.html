@@ -235,9 +235,18 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
   background:repeating-radial-gradient(circle at center, transparent 0 30px, rgba(23,114,110,.045) 30px 31px);
   -webkit-mask:radial-gradient(circle at center, #000 8%, transparent 62%);
           mask:radial-gradient(circle at center, #000 8%, transparent 62%); }
-.story h2{ font-size:clamp(28px,4.5vw,50px); font-weight:340; line-height:1.14; }
+.story h2{ font-size:clamp(28px,4.5vw,50px); font-weight:340; line-height:1.14; max-width:20ch; margin-inline:auto; }
 .story h2 em{ font-style:italic; color:var(--teal); }
-.story .place{ margin-top:32px; display:inline-flex; align-items:center; gap:12px; font-size:13px;
+.story__body{ max-width:60ch; margin:28px auto 0; text-align:left; display:grid; gap:16px; }
+.story__body p{ color:var(--ink); font-size:clamp(16px,1.85vw,18px); line-height:1.7; }
+.story__body .drop{ color:var(--muted); }
+.story__body b{ font-weight:500; color:var(--ink); }
+.story__proof{ margin-top:30px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+.story__chip{ display:inline-flex; align-items:center; gap:9px; padding:9px 16px; border-radius:100px;
+  border:1px solid var(--line); background:var(--paper-2); font-size:12.5px; letter-spacing:.01em; color:var(--ink);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 12px 26px -22px rgba(11,58,64,.35); }
+.story__chip svg{ width:16px; height:16px; color:var(--teal); flex:0 0 auto; }
+.story .place{ margin-top:30px; display:inline-flex; align-items:center; gap:12px; font-size:13px;
   letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
 .story .place svg{ width:16px; height:16px; color:var(--brass); }
 
@@ -818,9 +827,19 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
 <!-- STORY -->
 <section class="section story">
   <div class="wrap">
-    <span class="eyebrow center reveal">Our story</span>
-    <h2 class="reveal" data-delay="1" style="margin-top:26px">We opened Virginia's first Enagic® showroom so you'd never have to take water <em>on faith.</em> Walk in, taste all five waters, and watch the science happen at the counter.</h2>
-    <div class="place reveal" data-delay="2">
+    <span class="eyebrow center reveal">New to Kangen?</span>
+    <h2 class="reveal" data-delay="1" style="margin-top:26px">Chances are, this is your first time hearing <em>“Kangen.”</em> Here's the part that matters.</h2>
+    <div class="story__body reveal" data-delay="2">
+      <p class="drop">You already know your body is mostly water, so you try to drink more of it — from a tap you don't fully trust, or bottles you keep buying and throwing away. Good instinct. Incomplete answer.</p>
+      <p><b>Kangen Water® isn't another bottle.</b> It's what pours out of a machine invented in Japan: your own tap water, filtered, then split by electrolysis across medical-grade plates into water that's fresh, ionized, and rich in molecular hydrogen — and you drink it moments after it's made, before that freshness fades.</p>
+      <p>The machine has a track record most “wellness” products can only dream of. Enagic® has built them in Osaka <b>since 1974</b>. In Japan they're <b>certified medical devices</b>, used in hospitals, and the only ionizer recommended by <b>JAPA</b> — an association of 6,600+ preventive-medicine doctors. For most of those fifty years, you had to be in Japan to taste it. Now it's on tap in Occoquan — and the first glass is free.</p>
+    </div>
+    <div class="story__proof reveal" data-delay="3">
+      <span class="story__chip"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Made in Japan since 1974</span>
+      <span class="story__chip"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Certified medical device in Japan</span>
+      <span class="story__chip"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4l2.2 4.5 5 .7-3.6 3.5.85 5-4.45-2.35L7.55 17.7l.85-5L4.8 9.2l5-.7L12 4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>Recommended by JAPA · 6,600+ doctors</span>
+    </div>
+    <div class="place reveal" data-delay="4">
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.4 7-11a7 7 0 10-14 0c0 4.6 7 11 7 11z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.5"/></svg>
       206 Union Street · Historic Occoquan, Virginia
     </div>
