@@ -305,7 +305,7 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
 .phscale h4{ font-family:"Geist",sans-serif; font-size:12px; letter-spacing:.16em; text-transform:uppercase;
   color:var(--aqua-lt); font-weight:500; }
 .phscale__bar{ height:14px; border-radius:100px; margin:18px 0 10px;
-  background:linear-gradient(90deg,#c0392b,#e08e3c,#e9c94a,#7fc24a,#3fb6bc,#2f7fb8,#3a4fb8);
+  background:linear-gradient(90deg,#c0392b,#e08e3c,#e9c94a,#B9A6E8,#7C5DC7,#4C2E86);
   transform:scaleX(0); transform-origin:0 50%; transition:transform 1.2s var(--ease-out) .3s; }
 .phscale.in .phscale__bar{ transform:scaleX(1); }
 .phscale__ticks{ display:flex; justify-content:space-between; font-size:12px; color:rgba(247,245,239,.85); }
@@ -369,7 +369,11 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
 @media (max-width:820px){ .classes__grid{ grid-template-columns:1fr; } }
 
 /* systems (link-out only) */
-.systems{ background:var(--sand); }
+/* buying band: full-bleed sand inside the menu section */
+.systems{ background:var(--sand); scroll-margin-top:92px;
+  margin-top:clamp(52px,6vw,86px); margin-inline:calc(50% - 50vw);
+  padding-block:clamp(52px,6vw,88px); position:relative; }
+.waterzone{ position:relative; }
 .systems__head{ text-align:center; max-width:680px; margin-inline:auto; margin-bottom:clamp(36px,4vw,52px); }
 .systems__head h2{ font-size:clamp(30px,5vw,54px); font-weight:340; margin-top:18px; }
 .systems__head h2 em{ font-style:italic; color:var(--teal); }
@@ -619,6 +623,8 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
 .community__grid{ display:grid; grid-template-columns:1.5fr 1fr; gap:16px; }
 .community__grid .photo{ aspect-ratio:auto; height:clamp(300px,42vh,440px); }
 .community__grid .photo:first-child img{ object-position:center 34%; }
+.community__grid--single{ grid-template-columns:1fr; }
+.community__grid--single .photo{ height:clamp(320px,52vh,520px); }
 @media (max-width:760px){ .community__grid{ grid-template-columns:1fr; }
   .community__grid .photo{ height:clamp(240px,54vw,340px); } }
 
@@ -750,10 +756,9 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
     </a>
     <nav aria-label="Primary">
       <ul class="nav__links">
-        <li><a href="#menu">The Menu</a></li>
         <li><a href="#water">The Water</a></li>
+        <li><a href="#menu">The Menu</a></li>
         <li><a href="#classes">Free Class</a></li>
-        <li><a href="#systems">Systems</a></li>
         <li><a href="#business">Business</a></li>
         <li><a href="#visit">Visit</a></li>
       </ul>
@@ -769,10 +774,9 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
   </div>
 </header>
 <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-  <a href="#menu">The Menu</a>
   <a href="#water">The Water</a>
+  <a href="#menu">The Menu</a>
   <a href="#classes">Free Class</a>
-  <a href="#systems">Systems</a>
   <a href="#business">Business</a>
   <a href="#visit">Visit</a>
   <a class="btn btn--aqua" href="#classes">Reserve a class</a>
@@ -832,7 +836,7 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
     <div class="story__body reveal" data-delay="2">
       <p class="drop">You already know your body is mostly water, so you try to drink more of it — from a tap you don't fully trust, or bottles you keep buying and throwing away. Good instinct. Incomplete answer.</p>
       <p><b>Kangen Water® isn't another bottle.</b> It's what pours out of a machine invented in Japan: your own tap water, filtered, then split by electrolysis across medical-grade plates into water that's fresh, ionized, and rich in molecular hydrogen — and you drink it moments after it's made, before that freshness fades.</p>
-      <p>The machine has a track record most “wellness” products can only dream of. Enagic® has built them in Okinawa <b>since 1974</b>. In Japan they're <b>certified medical devices</b>, used in hospitals, and the only ionizer recommended by <b>JAPA</b> — an association of 6,600+ preventive-medicine doctors. Until we opened, tasting it meant a trip to Japan — or a showroom in California or New York. Now it's on tap right here in Occoquan, and the first glass is free.</p>
+      <p>Enagic® has built them in Okinawa <b>since 1974</b>. In Japan they're <b>certified medical devices</b>, used in hospitals, and the only ionizer recommended by <b>JAPA</b> — an association of 6,600+ preventive-medicine doctors. Today you'll find the same machines in <b>hospitals and holistic clinics, spas, restaurant kitchens, and the daily routines of athletes</b> around the world. Until we opened, tasting it meant a trip to Japan — or a showroom in California or New York. Now it's on tap right here in Occoquan.</p>
     </div>
     <div class="story__proof reveal" data-delay="3">
       <span class="story__chip"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Made in Japan since 1974</span>
@@ -852,55 +856,11 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
   </div>
 </section>
 
-<!-- FEATURED MENU -->
-<section class="section" id="menu">
-  <div class="wrap">
-    <div class="menu__head">
-      <div>
-        <span class="eyebrow reveal">The Menu</span>
-        <h2 class="reveal" data-delay="1" style="margin-top:18px">One machine. <em>Five waters.</em> A taste of what's on tap.</h2>
-      </div>
-      <p class="lead reveal" data-delay="2">Every water below is poured fresh from the same Enagic® system — no bottles, no additives. Come taste the difference between them side by side.</p>
-    </div>
-    <div class="menu__grid">
-      <article class="mcard mcard--star reveal">
-        <span class="mcard__badge">Guest favorite</span>
-        <div class="mcard__ph"><span class="chip" style="background:#3fb6bc">H₂</span>Hydrogen-Rich Water</div>
-        <p>Freshly ionized and loaded with dissolved molecular hydrogen — light, smooth, and best sipped the moment it's poured.</p>
-        <div class="mcard__use">Daily hydration · Recovery</div>
-      </article>
-      <article class="mcard reveal" data-delay="1">
-        <div class="mcard__ph"><span class="chip" style="background:#7fc24a">8.5</span>Kangen Water® 8.5–9.5</div>
-        <p>Ionized alkaline drinking water across three levels — the everyday pour our regulars fill their bottles with.</p>
-        <div class="mcard__use">Drink · Cook · Brew</div>
-      </article>
-      <article class="mcard reveal" data-delay="2">
-        <div class="mcard__ph"><span class="chip" style="background:#e9c94a">7.0</span>Clean Water 7.0</div>
-        <p>Neutral, filtered, pure. The gentle pour for little ones, pets, and taking with medication.</p>
-        <div class="mcard__use">Neutral · Everyday</div>
-      </article>
-      <article class="mcard reveal">
-        <div class="mcard__ph"><span class="chip" style="background:#e08e3c">6.0</span>Beauty Water 4.0–6.0</div>
-        <p>Mildly acidic and astringent — guests use it as a facial toner and a natural rinse for hair and skin.</p>
-        <div class="mcard__use">Skin · Hair · Toner</div>
-      </article>
-      <article class="mcard reveal" data-delay="1">
-        <div class="mcard__ph"><span class="chip" style="background:#2f7fb8;color:#fff">11.5</span>Strong Kangen 11.5</div>
-        <p>High-alkaline water for the kitchen — wash produce, lift oil, and prep without harsh chemicals.</p>
-        <div class="mcard__use">Kitchen · Produce</div>
-      </article>
-      <article class="mcard reveal" data-delay="2">
-        <div class="mcard__ph"><span class="chip" style="background:#c0392b;color:#fff">2.5</span>Strong Acidic 2.5</div>
-        <p>A crisp, sanitizing water for surfaces and hands — one of the reasons a single machine replaces a cabinet of bottles.</p>
-        <div class="mcard__use">Clean · Sanitize</div>
-      </article>
-    </div>
-    <p class="menu__note reveal">This is a taste, not the full list — the complete menu is poured fresh in-store. <a href="#visit" style="color:var(--teal);border-bottom:1px solid var(--line)">Come try all five →</a></p>
-  </div>
-</section>
+<!-- THE WATER — science, the menu, and what you can buy -->
+<section id="water" class="waterzone">
 
-<!-- THE WATER (science) -->
-<section class="section water" id="water">
+  <!-- the science -->
+  <section class="section water">
   <div class="wrap">
     <div class="water__grid">
       <div class="water__copy">
@@ -921,91 +881,61 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
           <div class="r"><span class="sw" style="background:#c0392b"></span>Strong Acidic — sanitizing<span class="v">2.5</span></div>
           <div class="r"><span class="sw" style="background:#e08e3c"></span>Beauty Water — skin &amp; hair<span class="v">4–6</span></div>
           <div class="r"><span class="sw" style="background:#e9c94a"></span>Clean Water — neutral<span class="v">7.0</span></div>
-          <div class="r"><span class="sw" style="background:#7fc24a"></span>Kangen — drinking<span class="v">8.5–9.5</span></div>
-          <div class="r"><span class="sw" style="background:#2f7fb8"></span>Strong Kangen — kitchen<span class="v">11.5</span></div>
+          <div class="r"><span class="sw" style="background:#B9A6E8"></span>Kangen — drinking<span class="v">8.5–9.5</span></div>
+          <div class="r"><span class="sw" style="background:#4C2E86"></span>Strong Kangen — kitchen<span class="v">11.5</span></div>
         </div>
       </div>
     </div>
   </div>
-</section>
+  </section>
 
-<!-- FILTERS -->
-<section class="section" id="filters">
-  <div class="wrap">
-    <div class="filters__head">
-      <span class="eyebrow center reveal">Filtration</span>
-      <h2 class="reveal" data-delay="1">What we take out, <em>before we add anything back.</em></h2>
-    </div>
-    <div class="filters__grid">
-      <div class="fcard reveal">
-        <div class="fcard__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h14l-2 9v5a2 2 0 01-2 2h-2l-3-2v-5L5 4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-        <h3>Sediment &amp; particulates</h3>
-        <p>The internal filter reduces rust, sand, and fine sediment carried in on aging pipes.</p>
-      </div>
-      <div class="fcard reveal" data-delay="1">
-        <div class="fcard__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <h3>Chlorine &amp; taste</h3>
-        <p>Activated carbon reduces chlorine and the taste-and-odor compounds that make tap water tap water.</p>
-      </div>
-      <div class="fcard reveal" data-delay="2">
-        <div class="fcard__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-        <h3>Clean, then ionized</h3>
-        <p>Water is filtered <em>before</em> electrolysis — so every pH level starts from a cleaner baseline.</p>
-      </div>
-      <div class="fcard reveal" data-delay="3">
-        <div class="fcard__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20c2-1 4-1 6 0M4 16c2-1 4-1 6 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 4l2 2-6 6-2.5.5.5-2.5 6-6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-        <h3>Anespa® for the whole shower</h3>
-        <p>Ask us about Anespa — a dedicated system that softens and dechlorinates your shower and bath water.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CLASSES -->
-<section class="section" id="classes">
+  <!-- the buying menu -->
+  <section class="section" id="menu">
   <div class="wrap">
     <div class="menu__head">
       <div>
-        <span class="eyebrow reveal">Water Classes</span>
-        <h2 class="reveal" data-delay="1" style="margin-top:18px">Come learn the water. <em>The first taste is on us.</em></h2>
+        <span class="eyebrow reveal">The Menu</span>
+        <h2 class="reveal" data-delay="1" style="margin-top:18px">One machine. <em>Five waters.</em> Taste them, then take one home.</h2>
       </div>
-      <p class="lead reveal" data-delay="2">Our weekly class is the easiest way to understand what all the fuss is about — no pressure, no purchase, just water and answers.</p>
+      <p class="lead reveal" data-delay="2">Every water below pours from the same Enagic® system — no bottles, no additives. Taste them side by side in store, then choose the setup that makes them at your sink.</p>
     </div>
-    <div class="classes__grid">
-      <div class="classcard classcard--free reveal">
-        <span class="tag">Free · Every week</span>
-        <h3>The Free Water Class</h3>
-        <p>Anka walks you through the five waters, side-by-side taste tests against your usual bottle and tap, and the science of hydrogen-rich water — start to finish, in about an hour. Three times a week, always free.</p>
-        <div class="classcard__meta">
-          <div class="m"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 9h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Saturdays 2pm · Tuesdays &amp; Fridays 7pm</div>
-          <div class="m"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.4 7-11a7 7 0 10-14 0c0 4.6 7 11 7 11z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.5"/></svg>At the Occoquan showroom</div>
-          <div class="m"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 20a5 5 0 00-10 0M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Seats are limited</div>
-        </div>
-        <a class="btn btn--aqua" href="#reserve">Reserve my seat
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-      <div class="classcard classcard--private reveal" data-delay="1">
-        <div>
-          <span class="tag">Private · By request</span>
-          <h3>Private Water Class</h3>
-          <p>Bring your family, team, or friends for a private tasting built around your questions — in-store or hosted at your home.</p>
-        </div>
-        <div>
-          <div class="classcard__meta">
-            <div class="m"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 20a5 5 0 00-10 0M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Your group, your pace</div>
-          </div>
-          <a class="rabbit" href="private-class.html">Go down the rabbit hole → the private class
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-      </div>
+    <div class="menu__grid">
+      <article class="mcard mcard--star reveal">
+        <span class="mcard__badge">Guest favorite</span>
+        <div class="mcard__ph"><span class="chip" style="background:#3fb6bc">H₂</span>Hydrogen-Rich Water</div>
+        <p>Freshly ionized and loaded with dissolved molecular hydrogen — light, smooth, and best sipped the moment it's poured.</p>
+        <div class="mcard__use">Daily hydration · Recovery</div>
+      </article>
+      <article class="mcard reveal" data-delay="1">
+        <div class="mcard__ph"><span class="chip" style="background:#B9A6E8">8.5</span>Kangen Water® 8.5–9.5</div>
+        <p>Ionized alkaline drinking water across three levels — the everyday pour our regulars fill their bottles with.</p>
+        <div class="mcard__use">Drink · Cook · Brew</div>
+      </article>
+      <article class="mcard reveal" data-delay="2">
+        <div class="mcard__ph"><span class="chip" style="background:#e9c94a">7.0</span>Clean Water 7.0</div>
+        <p>Neutral, filtered, pure. The gentle pour for little ones, pets, and taking with medication.</p>
+        <div class="mcard__use">Neutral · Everyday</div>
+      </article>
+      <article class="mcard reveal">
+        <div class="mcard__ph"><span class="chip" style="background:#e08e3c">6.0</span>Beauty Water 4.0–6.0</div>
+        <p>Mildly acidic and astringent — guests use it as a facial toner and a natural rinse for hair and skin.</p>
+        <div class="mcard__use">Skin · Hair · Toner</div>
+      </article>
+      <article class="mcard reveal" data-delay="1">
+        <div class="mcard__ph"><span class="chip" style="background:#4C2E86;color:#fff">11.5</span>Strong Kangen 11.5</div>
+        <p>High-alkaline water for the kitchen — wash produce, lift oil, and prep without harsh chemicals.</p>
+        <div class="mcard__use">Kitchen · Produce</div>
+      </article>
+      <article class="mcard reveal" data-delay="2">
+        <div class="mcard__ph"><span class="chip" style="background:#c0392b;color:#fff">2.5</span>Strong Acidic 2.5</div>
+        <p>A crisp, sanitizing water for surfaces and hands — one of the reasons a single machine replaces a cabinet of bottles.</p>
+        <div class="mcard__use">Clean · Sanitize</div>
+      </article>
     </div>
+    <p class="menu__note reveal">This is a taste, not the full list — the complete menu is poured fresh in-store. <a href="#visit" style="color:var(--teal);border-bottom:1px solid var(--line)">Come try all five →</a></p>
   </div>
-</section>
 
-<!-- SYSTEMS (CTA only, link out) -->
-<section class="section systems" id="systems">
+    <div class="systems" id="systems">
   <div class="wrap">
     <div class="systems__head">
       <span class="eyebrow center reveal">Choose your setup</span>
@@ -1093,10 +1023,8 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
         <img src="assets/products.jpg" alt="Enagic and Kangen products stacked at the showroom: LeveLuk K8, SD501, Anespa DX, Ukon tea, soap and turmeric" width="1206" height="1491" loading="lazy" />
         <span class="photo__grade" aria-hidden="true"></span>
         <span class="photo__grain" aria-hidden="true"></span>
-        <figcaption class="photo__cap">On the shelf in Occoquan</figcaption>
       </figure>
       <div class="shelf__note reveal" data-delay="1">
-        <h3>More than machines</h3>
         <p>Also made with Kangen Water® and kept in store: <strong>Kangen Ukon Tea</strong>, <strong>Ukon &amp; Honey Soap</strong>, and <strong>Turmeric Ukon DD</strong>. Ask us about them on your visit.</p>
       </div>
     </div>
@@ -1110,6 +1038,84 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
           <svg class="ext" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a class="btn btn--ghost-dark" href="#reserve">Book a demo first</a>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- FILTERS -->
+<section class="section" id="filters">
+  <div class="wrap">
+    <div class="filters__head">
+      <span class="eyebrow center reveal">Filtration</span>
+      <h2 class="reveal" data-delay="1">What we take out, <em>before we add anything back.</em></h2>
+    </div>
+    <div class="filters__grid">
+      <div class="fcard reveal">
+        <div class="fcard__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h14l-2 9v5a2 2 0 01-2 2h-2l-3-2v-5L5 4z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3>Sediment &amp; particulates</h3>
+        <p>The internal filter reduces rust, sand, and fine sediment carried in on aging pipes.</p>
+      </div>
+      <div class="fcard reveal" data-delay="1">
+        <div class="fcard__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>Chlorine &amp; taste</h3>
+        <p>Activated carbon reduces chlorine and the taste-and-odor compounds that make tap water tap water.</p>
+      </div>
+      <div class="fcard reveal" data-delay="2">
+        <div class="fcard__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3>Clean, then ionized</h3>
+        <p>Water is filtered <em>before</em> electrolysis — so every pH level starts from a cleaner baseline.</p>
+      </div>
+      <div class="fcard reveal" data-delay="3">
+        <div class="fcard__ico"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20c2-1 4-1 6 0M4 16c2-1 4-1 6 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 4l2 2-6 6-2.5.5.5-2.5 6-6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <h3>Anespa® for the whole shower</h3>
+        <p>Ask us about Anespa — a dedicated system that softens and dechlorinates your shower and bath water.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLASSES -->
+<section class="section" id="classes">
+  <div class="wrap">
+    <div class="menu__head">
+      <div>
+        <span class="eyebrow reveal">Water Classes</span>
+        <h2 class="reveal" data-delay="1" style="margin-top:18px">Come learn the water. <em>The first taste is on us.</em></h2>
+      </div>
+      <p class="lead reveal" data-delay="2">Our weekly class is the easiest way to understand what all the fuss is about — no pressure, no purchase, just water and answers.</p>
+    </div>
+    <div class="classes__grid">
+      <div class="classcard classcard--free reveal">
+        <span class="tag">Free · Every week</span>
+        <h3>The Free Water Class</h3>
+        <p>Anka walks you through the five waters, side-by-side taste tests against your usual bottle and tap, and the science of hydrogen-rich water — start to finish, in about an hour. Three times a week, always free.</p>
+        <div class="classcard__meta">
+          <div class="m"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M4 9h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Saturdays 2pm · Tuesdays &amp; Fridays 7pm</div>
+          <div class="m"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-6.4 7-11a7 7 0 10-14 0c0 4.6 7 11 7 11z" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.5"/></svg>At the Occoquan showroom</div>
+          <div class="m"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 20a5 5 0 00-10 0M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Seats are limited</div>
+        </div>
+        <a class="btn btn--aqua" href="#reserve">Reserve my seat
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="classcard classcard--private reveal" data-delay="1">
+        <div>
+          <span class="tag">Private · By request</span>
+          <h3>Private Water Class</h3>
+          <p>Bring your family, team, or friends for a private tasting built around your questions — in-store or hosted at your home.</p>
+        </div>
+        <div>
+          <div class="classcard__meta">
+            <div class="m"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 20a5 5 0 00-10 0M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Your group, your pace</div>
+          </div>
+          <a class="rabbit" href="private-class.html">Go down the rabbit hole → the private class
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -1232,13 +1238,7 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
       </div>
       <p class="lead reveal" data-delay="2">Free classes, neighbors, and the occasional full house. When we're not on Union Street, you'll find us pouring around Occoquan.</p>
     </div>
-    <div class="community__grid">
-      <figure class="photo reveal">
-        <img src="assets/Group.jpg" alt="A full room of guests and neighbors at a free Crave Kangen water class in the Occoquan showroom" width="1620" height="1080" loading="lazy" />
-        <span class="photo__grade" aria-hidden="true"></span>
-        <span class="photo__grain" aria-hidden="true"></span>
-        <figcaption class="photo__cap">A recent free water class at the showroom</figcaption>
-      </figure>
+    <div class="community__grid community__grid--single">
       <figure class="photo reveal" data-delay="1">
         <img src="assets/Festival.jpg" alt="The Crave Kangen booth pouring Kangen water at the Occoquan street festival" width="1800" height="1350" loading="lazy" />
         <span class="photo__grade" aria-hidden="true"></span>
