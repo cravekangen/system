@@ -654,14 +654,6 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
 /* story photo band */
 .story__photo{ margin-top:clamp(40px,5vw,60px); aspect-ratio:16/9; }
 
-/* community band */
-.community__grid{ display:grid; grid-template-columns:1.5fr 1fr; gap:16px; }
-.community__grid .photo{ aspect-ratio:auto; height:clamp(300px,42vh,440px); }
-.community__grid .photo:first-child img{ object-position:center 34%; }
-.community__grid--single{ grid-template-columns:1fr; }
-.community__grid--single .photo{ height:clamp(320px,52vh,520px); }
-@media (max-width:760px){ .community__grid{ grid-template-columns:1fr; }
-  .community__grid .photo{ height:clamp(240px,54vw,340px); } }
 
 @media (prefers-reduced-motion:reduce){
   .photo img, .photo:hover img{ transform:none; }
@@ -1240,32 +1232,6 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
       <a class="btn btn--ghost-dark" href="https://maps.app.goo.gl/UW6DSXTrqLTnHVTF6" target="_blank" rel="noopener">Read every review on Google
         <svg class="ext" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- COMMUNITY -->
-<section class="section community">
-  <div class="wrap">
-    <div class="menu__head">
-      <div>
-        <span class="eyebrow reveal">Connected</span>
-        <h2 class="reveal" data-delay="1" style="margin-top:18px">Straight to the source — <em>and rooted right here.</em></h2>
-      </div>
-      <p class="lead reveal" data-delay="2">We're not a reseller with a website. We know Enagic's people directly, and you'll find us pouring at the festival two blocks from the shop.</p>
-    </div>
-    <div class="community__grid">
-      <figure class="photo reveal">
-        <img src="assets/ceo.jpg" alt="The Crave Kangen team with Enagic leadership at the company campus, in front of the Enagic logo" width="1800" height="1350" loading="lazy" />
-        <span class="photo__grade" aria-hidden="true"></span>
-        <span class="photo__grain" aria-hidden="true"></span>
-      </figure>
-      <figure class="photo reveal" data-delay="1">
-        <img src="assets/Festival.jpg" alt="The Crave Kangen booth pouring Kangen water at the Occoquan street festival" width="1800" height="1350" loading="lazy" />
-        <span class="photo__grade" aria-hidden="true"></span>
-        <span class="photo__grain" aria-hidden="true"></span>
-        <figcaption class="photo__cap">Pouring at the Occoquan festival</figcaption>
-      </figure>
     </div>
   </div>
 </section>
