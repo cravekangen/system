@@ -4,11 +4,46 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Crave Kangen — Virginia's First Enagic Showroom · Occoquan</title>
-<meta name="description" content="Crave Kangen is Virginia's first Enagic showroom, in historic Occoquan. Taste hydrogen-rich Kangen Water®, join a free weekly water class, and see the machines for yourself." />
+<meta name="description" content="Crave Kangen is Virginia's first Enagic showroom, in historic Occoquan. Taste hydrogen-rich Kangen Water®, join a free water class, and see the machines for yourself." />
 <meta name="theme-color" content="#0B3A40" />
+<link rel="canonical" href="https://cravekangen.com/" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <meta property="og:title" content="Crave Kangen — Virginia's First Enagic Showroom" />
-<meta property="og:description" content="Hydrogen-rich Kangen Water®, free weekly classes, and live demos in Occoquan, VA." />
+<meta property="og:description" content="Hydrogen-rich Kangen Water®, free classes, and live demos in Occoquan, VA." />
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://cravekangen.com/" />
+<meta property="og:site_name" content="Crave Kangen" />
+<meta property="og:image" content="https://cravekangen.com/assets/storefront.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Crave Kangen — Virginia's First Enagic Showroom" />
+<meta name="twitter:description" content="Hydrogen-rich Kangen Water®, free classes, and live demos in Occoquan, VA." />
+<meta name="twitter:image" content="https://cravekangen.com/assets/storefront.jpg" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Crave Kangen",
+  "description": "Virginia's first Enagic showroom. Hydrogen-rich Kangen Water, free water classes, and live machine demos.",
+  "url": "https://cravekangen.com/",
+  "telephone": "+1-703-565-4854",
+  "image": "https://cravekangen.com/assets/storefront.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "206 Union Street, Unit 101",
+    "addressLocality": "Occoquan",
+    "addressRegion": "VA",
+    "postalCode": "22125",
+    "addressCountry": "US"
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "10:00", "closes": "18:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday","Thursday","Friday","Saturday"], "opens": "10:00", "closes": "19:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "10:00", "closes": "17:00" }
+  ]
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -628,15 +663,6 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
 @media (max-width:760px){ .community__grid{ grid-template-columns:1fr; }
   .community__grid .photo{ height:clamp(240px,54vw,340px); } }
 
-/* systems shelf: product photo + ukon note */
-.shelf{ display:grid; grid-template-columns:.62fr 1fr; gap:clamp(24px,4vw,44px); align-items:center;
-  margin:-4px 0 36px; }
-.shelf__photo{ aspect-ratio:4/5; }
-.shelf__note h3{ font-size:clamp(22px,2.4vw,28px); font-weight:400; }
-.shelf__note p{ color:var(--muted); font-size:15px; margin-top:12px; max-width:42ch; }
-.shelf__note strong{ color:var(--ink); font-weight:500; }
-@media (max-width:720px){ .shelf{ grid-template-columns:1fr; gap:22px; } .shelf__photo{ max-width:320px; } }
-
 @media (prefers-reduced-motion:reduce){
   .photo img, .photo:hover img{ transform:none; }
   .hero__photo{ transform:none; }
@@ -1018,16 +1044,6 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
       <div class="sys reveal" data-delay="3"><div class="k">Anespa®</div><div class="t">The shower</div><p>Dechlorinated, mineral-rich water for your whole shower and bath.</p></div>
       <div class="sys sys--partner reveal" data-delay="4"><div class="k">Aquaperform®</div><div class="t">The filter · Multipure</div><p>NSF 42/53/401 carbon-block filtration — reduces arsenic, lead &amp; pharmaceuticals.</p></div>
     </div>
-    <div class="shelf">
-      <figure class="photo shelf__photo reveal">
-        <img src="assets/products.jpg" alt="Enagic and Kangen products stacked at the showroom: LeveLuk K8, SD501, Anespa DX, Ukon tea, soap and turmeric" width="1206" height="1491" loading="lazy" />
-        <span class="photo__grade" aria-hidden="true"></span>
-        <span class="photo__grain" aria-hidden="true"></span>
-      </figure>
-      <div class="shelf__note reveal" data-delay="1">
-        <p>Also made with Kangen Water® and kept in store: <strong>Kangen Ukon Tea</strong>, <strong>Ukon &amp; Honey Soap</strong>, and <strong>Turmeric Ukon DD</strong>. Ask us about them on your visit.</p>
-      </div>
-    </div>
     <div class="systems__cta reveal">
       <div>
         <h3>Already know your Kangen® model? <em>Check out securely on the official store.</em></h3>
@@ -1243,7 +1259,6 @@ html{ scrollbar-width:thin; scrollbar-color:var(--teal) var(--paper); }
         <img src="assets/ceo.jpg" alt="The Crave Kangen team with Enagic leadership at the company campus, in front of the Enagic logo" width="1800" height="1350" loading="lazy" />
         <span class="photo__grade" aria-hidden="true"></span>
         <span class="photo__grain" aria-hidden="true"></span>
-        <figcaption class="photo__cap">With Enagic leadership at the company campus</figcaption>
       </figure>
       <figure class="photo reveal" data-delay="1">
         <img src="assets/Festival.jpg" alt="The Crave Kangen booth pouring Kangen water at the Occoquan street festival" width="1800" height="1350" loading="lazy" />

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cravekangen.com/sitemap.xml
