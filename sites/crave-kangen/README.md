@@ -29,7 +29,8 @@ section and footer.
 ## Real business details baked in
 
 - **Address:** 206 Union Street, Unit 101, Occoquan, VA 22125
-- **Phone:** (703) 565-4854 · **Hours:** Tue 10–6 · Wed–Sat 10–7 · Sun 10–5 (Mon closed)
+- **Phone:** (570) 530-2142 · **Email:** virginia@cravekangen.com
+- **Hours:** Tue, Fri & Sat 12–7 (closed Sun, Mon, Wed, Thu)
 - Rating shown as **4.7★** with a link straight to the Google listing.
 - **Free class schedule:** Saturdays 2pm · Tuesdays & Fridays 7pm (shown in topbar, class card, and reservation form).
 - Systems "Buy your machine" → `cravekangen.enagicweb.info` (treated as the **ready-to-buy checkout link**, with a "Book a demo first" secondary CTA); opportunity → `cravekangen.enagicweb.net`.
@@ -41,7 +42,6 @@ section and footer.
   the *genuine sentiment* found in your listings but are attributed generically
   ("Verified guest review"). Replace with verbatim quotes + names, or leave the
   "Read every review on Google" button to do the work. Confirm the 4.7★ figure.
-- **Email:** `hello@cravekangen.com` is a guess — set your real address.
 - **Marketing software:** described generically (capture/follow-up, funnels,
   analytics). Drop in its real name + link/pricing.
 - **Machine line-up & links:** K8 / SD501 / JR IV / Anespa are described; verify
