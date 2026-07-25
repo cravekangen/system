@@ -32,6 +32,10 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        # Turn Pages on (source: GitHub Actions) if it isn't already, so the
+        # deploy doesn't depend on the repo setting being toggled by hand.
+        with:
+          enablement: true
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
